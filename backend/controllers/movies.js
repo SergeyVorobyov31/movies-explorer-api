@@ -8,12 +8,7 @@ module.exports.getMovie = (req, res, next) => {
   const owner = req.user.id;
   Movie.find({})
     .then((movies) => {
-      const arr = movies.map((movie) => {
-        if (movie.owner.toString() === owner) {
-          return movie;
-        }
-        return movies;
-      });
+      const arr = movies.filter((movie) => movie.owner.toString() === owner);
       res.send(arr);
     })
     .catch(() => {
@@ -85,7 +80,6 @@ module.exports.deleteMovie = (req, res, next) => {
       }
     })
     .catch((e) => {
-      res.send(e);
       if (e.name === 'CastError') {
         next(new BadRequestError('Передан некорректный id.'));
       } else {

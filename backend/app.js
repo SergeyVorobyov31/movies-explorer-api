@@ -8,27 +8,27 @@ const { createUser, login } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_URL } = process.env;
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://127.0.0.1/movies-explorer').then(() => console.log('Успешное подключение к MongoDB')).catch((err) => console.error('Ошибка подключения:', err));
+mongoose.connect(`${DB_URL}`).then(() => console.log('Успешное подключение к MongoDB')).catch((err) => console.error('Ошибка подключения:', err));
 
 app.use(requestLogger);
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
   }),
 }), createUser);
 app.post('/signin', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 }), login);

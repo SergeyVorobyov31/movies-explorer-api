@@ -9,10 +9,10 @@ router.get('/', getMovie);
 
 router.post('/', celebrate({
   body: Joi.object().keys({
-    country: Joi.string().min(3).required(),
+    country: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
-    year: Joi.string().min(4).required(),
+    year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().regex(/[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/i).required(),
     trailerLink: Joi.string().regex(/[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/i).required(),
