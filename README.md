@@ -6,4 +6,4 @@ IP-адрес 158.160.108.60
 
 Frontend ***
 
-Backend api.movies-explorer.net.nomoredomains.rocks
+Backend https://api.movies-explorer.net.nomoredomains.rocks
