@@ -1,0 +1,25 @@
+@import url('./Promo/Promo.css');
+@import url('./AboutProject/AboutProject.css');
+@import url('./Techs/Techs.css');
+@import url('./AboutMe/AboutMe.css');
+@import url('./NavTab/NavTab.css');
+@import url('./Portfolio/Portfolio.css');
+
+.component__title {
+    color: #fff;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    margin: 0;
+    padding: 0 0 23px;
+    border-bottom: 1px solid #fff;
+}
+
+@media screen and (min-width: 300px) and (max-width: 767px) {
+    .component__title {
+        font-size: 18px;
+        line-height: 22px;
+        padding: 0 0 28px;
+    }
+}

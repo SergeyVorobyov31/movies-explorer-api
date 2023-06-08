@@ -1,0 +1,233 @@
+.header {
+    padding: 18px 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_sign {
+    max-width: 396px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 0 auto;
+    padding: 70px 0 0;
+    .header__menu {
+        display: none;
+    }
+}
+
+.header__logo {
+    min-width: 38px;
+    max-height: 38px;
+    cursor: pointer;
+}
+
+.header__menu {
+    display: none;
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+}
+
+.header__container_center {
+    margin: 0 0 0 31px;
+}
+
+.header__container_nav {
+    display: flex;
+    align-items: center;
+}
+
+.header__container_ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.header__container_nav_item {
+    list-style-type: none;
+    transition: all .2s ease;
+}
+
+.header__container_nav_item:hover {
+    opacity: 0.7;
+}
+
+.header_main {
+    background-color: #073042;
+    .header__menu {
+        display: none;
+    }
+}
+
+.header__signup {
+    color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+    background-color: #073042;
+    border: 0;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.header__signup:hover {
+    opacity: 0.7;
+}
+
+.header__signin {
+    color: #000;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0 0 0 30px;
+    padding: 8px 20px;
+    background-color: #3DDC84;
+    border: 0px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.header__signin:hover {
+    opacity: 0.7;
+}
+
+.header_movies {
+    background-color: #202020;
+}
+
+.header__films {
+    color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0;
+    padding: 0;
+    background-color: #202020;
+    border: 0;
+    cursor: pointer;
+}
+
+.header__films_active {
+    font-weight: 500;
+}
+
+.header__saved-films {
+    margin: 0 0 0 16px;
+}
+
+.header__account {
+    display: flex;
+    align-items: center;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.header__account:hover {
+    opacity: 0.7;
+}
+
+.header__account_text {
+    color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0;
+    background-color: #202020;
+    border: 0;
+    cursor: pointer;
+}
+
+.header__logo_account {
+    background-color: #313131;
+    border: 0;
+    border-radius: 50%;
+    padding: 8px;
+    margin: 0 0 0 7px;
+    cursor: pointer;
+}
+
+.header__title {
+    width: 100%;
+    color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 40px 0;
+    padding: 0;
+}
+
+@media screen and (min-width: 768px) and (max-width: 950px) {
+    .header {
+        padding: 18px 30px;
+    }
+
+    .header__menu {
+        display: block;
+    }
+
+    .header__container_center {
+        display: none;
+    }
+
+    .header__account {
+        display: none;
+    }
+
+    .header_sign {
+        padding: 232px 0 0;
+    }
+}
+
+@media screen and (min-width: 250px) and (max-width: 767px) {
+    .header {
+        padding: 18px 14px;
+    }
+
+    .header__signup {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .header__signin {
+        font-size: 10px;
+        line-height: 16px;
+        padding: 5px 12px;
+        margin: 0 0 0 14px;
+    }
+
+     .header__menu {
+        display: block;
+    }
+
+    .header__container_center {
+        display: none;
+    }
+
+    .header__account {
+        display: none;
+    }
+
+    .header_sign {
+        padding: 56px 0 80px;
+        align-items: center;
+    }
+
+    .header__title {
+        text-align: center;
+        margin: 50px 0 0;
+    }
+}
