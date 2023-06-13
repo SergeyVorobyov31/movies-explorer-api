@@ -12,7 +12,7 @@ function Main(props) {
       <>
         <Header 
           name={'main'}
-          children={<NavTab navigateToRegister={props.navigateToRegister} navigateToLogin={props.navigateToLogin}/>}
+          children={<NavTab/>}
         />
         <main className="main"> 
           <Promo/>

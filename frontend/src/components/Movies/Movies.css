@@ -4,6 +4,8 @@
 @import url('./MoviesCard/MoviesCard.css');
 
 .movies {
+    max-width: 1280px;
+    margin: 0 auto;
     background-color: #202020;
     padding: 0 70px;
 }

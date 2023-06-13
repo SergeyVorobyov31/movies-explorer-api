@@ -15,8 +15,8 @@ function Profile(props) {
                         <div className="header__container_center">
                             <nav className="header__container_nav">
                             <ul className="header__container_ul">
-                                <li className="header__container_nav_item"><button className="header__films" type="button" onClick={props.navigateToMovies}>Фильмы</button></li>
-                                <li className="header__container_nav_item"><button className="header__films header__saved-films" type="button" onClick={props.navigateToSavedMovies}>Сохранённые фильмы</button></li>
+                                <li className="header__container_nav_item"><a className="header__films" href="/movies">Фильмы</a></li>
+                                <li className="header__container_nav_item"><a className="header__films header__saved-films" href="/saved-movies">Сохранённые фильмы</a></li>
                             </ul>
                             </nav>
                         </div>
@@ -33,12 +33,12 @@ function Profile(props) {
                     <div className="profile__inputs">
                         <div className="profile__input-container">
                         <label htmlFor="profile__name" className="profile__label">Имя</label>
-                        <input type="text" id="profile__name" className="profile__input" name="name" defaultValue="Сергей"/>
+                        <input type="text" id="profile__name" className="profile__input" name="name" defaultValue="Сергей" required/>
                         <span className="profile__input_error"></span>
                         </div>
                         <div className="profile__input-container">
                         <label htmlFor="profile__email" className="profile__label">E-mail</label>
-                        <input type="email" id="profile__email" className="profile__input" name="email" defaultValue="pochta@yandex.ru"/>
+                        <input type="email" id="profile__email" className="profile__input" name="email" defaultValue="pochta@yandex.ru" required/>
                         <span className="profile__input_error"></span>
                         </div>
                     </div>

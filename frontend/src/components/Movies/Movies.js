@@ -18,8 +18,8 @@ function Movies(props) {
                         <div className="header__container_center">
                             <nav className="header__container_nav">
                             <ul className="header__container_ul">
-                                <li className="header__container_nav_item"><button type="button" className="header__films header__films_active">Фильмы</button></li>
-                                <li className="header__container_nav_item"><button type="button" className="header__films header__saved-films" onClick={props.navigateToSavedMovies}>Сохранённые фильмы</button></li>
+                                <li className="header__container_nav_item"><a className="header__films header__films_active" href="/movies">Фильмы</a></li>
+                                <li className="header__container_nav_item"><a className="header__films header__saved-films" href="/saved-movies">Сохранённые фильмы</a></li>
                             </ul>
                             </nav>
                         </div>

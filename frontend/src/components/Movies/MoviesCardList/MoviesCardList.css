@@ -1,5 +1,6 @@
 .moviesCardList {
     padding: 0 0 80px;
+    min-height: 448px;
 }
 
 .elements__list {

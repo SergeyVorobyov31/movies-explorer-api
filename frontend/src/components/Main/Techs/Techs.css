@@ -3,6 +3,11 @@
     padding: 100px 70px;
 }
 
+.techs__container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 .techs__header {
     margin: 0 0 90px;
 }
@@ -22,6 +27,7 @@
     font-size: 50px;
     line-height: 58px;
     margin: 0 0 26px;
+    letter-spacing: -0.04em;
 }
 
 .techs__body_subtitle {
@@ -31,6 +37,7 @@
     font-size: 14px;
     line-height: 20px;
     margin: 0;
+    letter-spacing: -0.04em;
 }
 
 .techs__footer {
@@ -67,7 +74,6 @@
     align-items: center;
     min-width: 90px;
     min-height: 60px;
-    /* margin: 0 5px 0; */
     padding: 0;
     border: 0;
     border-radius: 10px;
@@ -78,6 +84,7 @@
     font-size: 14px;
     line-height: 17px;
     transition: all .2s ease;
+    letter-spacing: -0.04em;
 }
 
 .techs__footer_link:hover {

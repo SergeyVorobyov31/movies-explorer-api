@@ -7,7 +7,7 @@ function Popup(props) {
     return(
         <div className={`popup ${props.isOpen ? "popup_opened": ""}`}>
             <div className="popup__overlay" onClick={props.onClose}></div>
-            <form className="popup__form" noValidate>
+            <div className="popup__form">
                 <img className="popup__close-icon" src={closeIcon} alt="Закрыть" onClick={props.onClose}/>
                 <nav className="popup__nav">
                     <ul className="popup__ul">
@@ -20,7 +20,7 @@ function Popup(props) {
                     <button className="popup__account_text" type="button">Аккаунт</button>
                     <img className="popup__logo_account" src={logoAccount} alt="Логотип аккаунта"/>
                 </div>
-            </form>
+            </div>
         </div>
     );
 }

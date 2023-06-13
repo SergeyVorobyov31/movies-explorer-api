@@ -9,12 +9,6 @@
 @import url('../PageNotFound/PageNotFound.css');
 @import url('../Popup/Popup.css');
 
-.page {
-  min-height: 100vh;
-  margin: 0 auto;
-}
-
-
 #root {
   min-height: 100vh;
   background-color: #202020;

@@ -5,8 +5,8 @@ function NavTab(props) {
         <>
             <nav className="header__container_nav">
                 <ul className="header__container_ul">
-                    <li className="header__container_nav_item"><button className="header__signup" type="button" onClick={props.navigateToRegister}>Регистрация</button></li>
-                    <li className="header__container_nav_item"><button className="header__signin" type="button" onClick={props.navigateToLogin}>Войти</button></li>
+                    <li className="header__container_nav_item"><a className="header__signup" href='/signup'>Регистрация</a></li>
+                    <li className="header__container_nav_item"><a className="header__signin" href='/signin'>Войти</a></li>
                 </ul>
             </nav>
         </>

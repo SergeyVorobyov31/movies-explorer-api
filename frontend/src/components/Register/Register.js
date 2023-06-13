@@ -13,7 +13,7 @@ function Register(props) {
             }
             />
             <div className="sign__component">
-                <form className="sign__form sign__form_register" >
+                <form className="sign__form sign__form_register">
                     <div className="sign__container">
                         <label className="sign__label" for="sign__input_name">Имя</label>
                         <input className="sign__input" id="sign__input_name" type="text" placeholder="" required/>

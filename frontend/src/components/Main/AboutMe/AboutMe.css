@@ -1,6 +1,8 @@
 .aboutMe {
+    max-width: 1280px;
     background-color: #202020;
     padding: 100px 70px 100px;
+    margin: 0 auto;
 }
 
 .aboutMe__header {
@@ -26,6 +28,7 @@
     font-size: 50px;
     line-height: 58px;
     margin: 0 0 18px;
+    letter-spacing: -0.04em;
 }
 
 .aboutMe__body_subtitle {

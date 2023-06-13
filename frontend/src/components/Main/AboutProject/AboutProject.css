@@ -1,6 +1,8 @@
 .aboutProject {
     background-color: #202020;
     padding: 110px 70px;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 .aboutProject__header {
@@ -23,6 +25,8 @@
     font-size: 20px;
     line-height: 24px;
     margin: 0;
+    letter-spacing: -0.04em;
+    overflow: hidden;
 }
 
 .aboutProject__body_subtitle {
@@ -32,6 +36,7 @@
     font-size: 14px;
     line-height: 20px;
     margin: 0;
+    overflow: hidden;
 }
 
 .aboutProject__footer {

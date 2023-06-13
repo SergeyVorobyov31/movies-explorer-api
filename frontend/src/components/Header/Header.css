@@ -1,7 +1,7 @@
 .header {
     padding: 18px 70px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -17,18 +17,47 @@
     }
 }
 
+.header__container_sign {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    max-width: 396px;
+}
+
 .header__logo {
     min-width: 38px;
     max-height: 38px;
     cursor: pointer;
+    transition: all .2s ease;
+}
+
+.header__logo:hover {
+    opacity: 0.7;
 }
 
 .header__menu {
     display: none;
 }
 
-.header__container {
+.header__container_main {
+    width: 1280px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__container_movies {
+    width: 1280px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__wrapper {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -70,6 +99,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
+    text-decoration: none;
     margin: 0;
     padding: 0;
     background-color: #073042;
@@ -88,6 +118,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
+    text-decoration: none;
     margin: 0 0 0 30px;
     padding: 8px 20px;
     background-color: #3DDC84;
@@ -111,6 +142,7 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 18px;
+    text-decoration: none;
     margin: 0;
     padding: 0;
     background-color: #202020;
@@ -172,7 +204,7 @@
 
 @media screen and (min-width: 768px) and (max-width: 950px) {
     .header {
-        padding: 18px 30px;
+        padding: 15px 30px;
     }
 
     .header__menu {
@@ -194,7 +226,7 @@
 
 @media screen and (min-width: 250px) and (max-width: 767px) {
     .header {
-        padding: 18px 14px;
+        padding: 15px 14px;
     }
 
     .header__signup {
@@ -211,6 +243,10 @@
 
      .header__menu {
         display: block;
+    }
+
+    .header__container_sign {
+        align-items: center;
     }
 
     .header__container_center {

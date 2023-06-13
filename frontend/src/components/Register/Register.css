@@ -45,6 +45,10 @@
     overflow: hidden;
 }
 
+.sign__input:focus {
+    background-color: #3f3f3f;
+}
+
 .sign__error {
     min-height: 12px;
     color: #EE3465;

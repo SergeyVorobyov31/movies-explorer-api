@@ -9,7 +9,6 @@ import Profile from '../Profile/Profile'
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
-// import Popup from '../Popup/Popup';
 
 function App() {
   const navigate = useNavigate();
@@ -64,10 +63,10 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={
-        <div className='page'>
+        <>
           <Main navigateToRegister={navigateToRegister} navigateToLogin={navigateToLogin}/>
           <Footer/>
-        </div>}
+        </>}
       />
       <Route path='/movies' element={
         <Movies navigateToMain={navigateToMain} navigateToSavedMovies={navigateToSavedMovies} navigateToProfile={navigateToProfile} onPopup={popupOpen} isOpen={isPopup} onClose={closePopup}/>
