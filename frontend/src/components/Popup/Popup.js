@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import closeIcon from "../../images/close-icon.png";
 import logoAccount from '../../images/logo-account.png';
 
