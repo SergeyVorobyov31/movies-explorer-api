@@ -1,7 +1,7 @@
 @import url('./SavedMoviesCardList/SavedMoviesCardList.css');
 
 .savedMovies {
-    max-width: 1280px;
+    max-width: 1140px;
     margin: 0 auto;
     background-color: #202020;
     padding: 0 70px;

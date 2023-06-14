@@ -4,7 +4,7 @@
 }
 
 .promo__container {
-    max-width: 1280px;
+    max-width: 1140px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -14,7 +14,6 @@
 .promo__banner {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin: 0 0 84px;
 }
 
@@ -66,6 +65,7 @@
 
     .promo__banner {
         flex-direction: column-reverse;
+        align-items: center;
         margin: 0;
     }
 
@@ -103,6 +103,7 @@
 
     .promo__banner {
         flex-direction: column-reverse;
+        align-items: center;
         margin: 0;
     }
 

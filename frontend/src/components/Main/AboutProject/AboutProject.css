@@ -1,7 +1,7 @@
 .aboutProject {
     background-color: #202020;
     padding: 110px 70px;
-    max-width: 1280px;
+    max-width: 1140px;
     margin: 0 auto;
 }
 
@@ -11,14 +11,14 @@
 
 .aboutProject__body {
     display: grid;
-    grid-template-rows: 24px 40px;
+    grid-template-rows: min-content min-content;
     grid-template-columns: 1fr 1fr;
     row-gap: 26px;
     column-gap: 40px;
     margin: 0 0 110px;
 }
 
-.aboutProject__body_title {
+.aboutProject__body-title {
     color: #fff;
     font-family: "Inter", Arial, Helvetica, sans-serif;
     font-weight: 400;
@@ -26,17 +26,16 @@
     line-height: 24px;
     margin: 0;
     letter-spacing: -0.04em;
-    overflow: hidden;
 }
 
-.aboutProject__body_subtitle {
+.aboutProject__body-subtitle {
+    max-height: min-content;
     color: #fff;
     font-family: "Inter", Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     margin: 0;
-    overflow: hidden;
 }
 
 .aboutProject__footer {
@@ -48,7 +47,7 @@
     row-gap: 14px;
 }
 
-.aboutProject__footer_title {
+.aboutProject__footer-title {
     background-color: #3DDC84;
     justify-self: stretch;
     text-align: center;
@@ -61,12 +60,12 @@
     padding: 9px 0;
 }
 
-.aboutProject__footer_title:last-of-type {
+.aboutProject__footer-title:last-of-type {
     background-color: #303030;
     color: #fff;
 }
 
-.aboutProject__footer_subtitle {
+.aboutProject__footer-subtitle {
     justify-self: center;
     color: #8B8B8B;
     font-family: "Inter", Arial, Helvetica, sans-serif;
@@ -90,7 +89,7 @@
         margin: 0 0 93px;
     }
 
-    .aboutProject__body_subtitle {
+    .aboutProject__body-subtitle {
         font-size: 12px;
         line-height: 18px;
     }
@@ -117,27 +116,27 @@
         margin: 0 0 60px;
     }
 
-    .aboutProject__body_title:first-of-type {
+    .aboutProject__body-title:first-of-type {
         grid-area: title1;
         font-size: 18px;
         line-height: 22px;
         row-gap: 16px;
     }
 
-    .aboutProject__body_subtitle:first-of-type {
+    .aboutProject__body-subtitle:first-of-type {
         grid-area: subtitle1;
         font-size: 11px;
         line-height: 16px;
         row-gap: 56px;
     }
 
-    .aboutProject__body_title:last-of-type {
+    .aboutProject__body-title:last-of-type {
         grid-area: title2;
         font-size: 18px;
         line-height: 22px;
     }
 
-    .aboutProject__body_subtitle:last-of-type {
+    .aboutProject__body-subtitle:last-of-type {
         grid-area: subtitle2;
         font-size: 11px;
         line-height: 16px;
@@ -149,12 +148,12 @@
         row-gap: 10px;
     }
 
-    .aboutProject__footer_title {
+    .aboutProject__footer-title {
         font-size: 11px;
         line-height: 13px;
     }
 
-    .aboutProject__footer_subtitle {
+    .aboutProject__footer-subtitle {
         font-size: 11px;
         line-height: 13px;
     }

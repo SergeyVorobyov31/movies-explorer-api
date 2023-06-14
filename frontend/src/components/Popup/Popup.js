@@ -16,7 +16,7 @@ function Popup(props) {
                     </ul>
                 </nav>
                 <div className="popup__account" onClick={props.navigateToProfile}>
-                    <button className="popup__account_text" type="button">Аккаунт</button>
+                    <button className="popup__account-text" type="button">Аккаунт</button>
                     <img className="popup__logo_account" src={logoAccount} alt="Логотип аккаунта"/>
                 </div>
             </div>

@@ -15,16 +15,16 @@ function Movies(props) {
                 name={'movies'}
                 children={
                     <>
-                        <div className="header__container_center">
-                            <nav className="header__container_nav">
-                            <ul className="header__container_ul">
-                                <li className="header__container_nav_item"><a className="header__films header__films_active" href="/movies">Фильмы</a></li>
-                                <li className="header__container_nav_item"><a className="header__films header__saved-films" href="/saved-movies">Сохранённые фильмы</a></li>
+                        <div className="header__container-center">
+                            <nav className="header__container-nav">
+                            <ul className="header__container-ul">
+                                <li className="header__container-nav_item"><a className="header__films header__films_active" href="/movies">Фильмы</a></li>
+                                <li className="header__container-nav_item"><a className="header__films header__saved-films" href="/saved-movies">Сохранённые фильмы</a></li>
                             </ul>
                             </nav>
                         </div>
                         <div className="header__account" onClick={props.navigateToProfile}>
-                            <button className="header__account_text" type="button">Аккаунт</button>
+                            <button className="header__account-text" type="button">Аккаунт</button>
                             <img className="header__logo_account" src={logoAccount} alt="Логотип аккаунта"/>
                         </div>
                     </>
