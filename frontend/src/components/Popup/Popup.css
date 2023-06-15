@@ -1,0 +1,149 @@
+.popup {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.popup_opened {
+    opacity: 1;
+    visibility: visible;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 520px;
+    height: 100vh;
+    transition: all .4s ease;
+    z-index: 2;
+}
+
+.popup__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0.3;
+    z-index: 2;
+}
+
+.popup__form {
+    position: relative;
+    height: 100vh;
+    background-color: #202022;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 160px 0 0;
+    z-index: 3;
+}
+
+.popup__close-icon {
+    position: absolute;
+    top: 23px;
+    right: 22px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.popup__ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.popup__li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 28px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.popup__li_active {
+    margin: 0 0 22px;
+    padding: 0 0 4px;
+    border-bottom: 2px solid #fff;
+}
+
+.popup__li:hover {
+    opacity: 0.7;
+}
+
+.popup__li_text {
+    color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.popup__account {
+    position: fixed;
+    bottom: 90px;
+    display: flex;
+    align-items: center;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.popup__account:hover {
+    opacity: 0.7;
+}
+
+.popup__account-text {
+    color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 12px;
+    margin: 0;
+    padding: 0;
+    background-color: #202020;
+    border: 0;
+    cursor: pointer;
+}
+
+.popup__logo_account {
+    background-color: #313131;
+    border: 0;
+    border-radius: 50%;
+    padding: 8px;
+    margin: 0 0 0 7px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 951px) {
+    .popup_opened {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .popup__overlay {
+        opacity: 0;
+    }
+}
+
+@media screen and (min-width: 250px) and (max-width: 767px) {
+    .popup_opened {
+        width: 320px;
+    }
+
+    .popup__account {
+        bottom: 46px;
+    }
+
+    .popup__close-icon {
+        top: 14px;
+        right: 14px;
+    }
+
+    .popup__form {
+        padding: 144px 0 0;
+    }
+}

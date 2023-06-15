@@ -1,0 +1,16 @@
+@import url('../Header/Header.css');
+@import url('../Main/Main.css');
+@import url('../Footer/Footer.css');
+@import url('../Movies/Movies.css');
+@import url('../SavedMovies/SavedMovies.css');
+@import url('../Profile/Profile.css');
+@import url('../Register/Register.css');
+@import url('../Login/Login.css');
+@import url('../PageNotFound/PageNotFound.css');
+@import url('../Popup/Popup.css');
+
+#root {
+  min-height: 100vh;
+  background-color: #202020;
+  margin: 0 auto;
+}
