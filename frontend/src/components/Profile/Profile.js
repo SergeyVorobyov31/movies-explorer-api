@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header/Header";
 import logoAccount from '../../images/logo-account.png';
 import Popup from "../Popup/Popup";
+import Preloader from "../Preloader/Preloader";
 
 function Profile(props) {
+
+    const [formValue, setFormValue] = useState({
+        name: "",
+        email: ""
+    });
+    const [errors, setErrors] = React.useState({
+        name: "",
+        email: ""
+    });
+    const [isValid, setIsValid] = React.useState(false);
+
+    const handleChange = (e) => {
+        const target = e.target;
+        const {name, value} = target;
+        setFormValue({
+            ...formValue,
+            [name]: value
+        });
+        setErrors({...errors, [name]: target.validationMessage });
+        setIsValid(target.closest("form").checkValidity());
+        if(target.value === props.currentUser.name || target.value === props.currentUser.email) {
+            setIsValid(false);
+        }
+    }
+
+    function updateProfile(e) {
+        if (isValid) {
+            const name = document.getElementById('profile__name');
+            const email = document.getElementById('profile__email');
+            if (name.value !== props.currentUser.name || email.value !== props.currentUser.email) {
+                props.updateUser(name.value, email.value);
+            } 
+        } else {
+            e.preventDefault();
+            return;
+        }
+    }
+    
+
     return(
         <>
             <Header
@@ -15,8 +55,8 @@ function Profile(props) {
                         <div className="header__container-center">
                             <nav className="header__container-nav">
                             <ul className="header__container-ul">
-                                <li className="header__container-nav_item"><a className="header__films" href="/movies">Фильмы</a></li>
-                                <li className="header__container-nav_item"><a className="header__films header__saved-films" href="/saved-movies">Сохранённые фильмы</a></li>
+                                <li className="header__container-nav_item"><button className="header__films" onClick={props.navigateToMovies}>Фильмы</button></li>
+                                <li className="header__container-nav_item"><button className="header__films header__saved-films" onClick={props.navigateToSavedMovies}>Сохранённые фильмы</button></li>
                             </ul>
                             </nav>
                         </div>
@@ -28,24 +68,25 @@ function Profile(props) {
                 }
             />
             <div className="profile">
-                <h1 className="profile__title">Привет, Сергей!</h1>
-                <form className="profile__form">
+                <h1 className="profile__title">Привет, {`${props.currentUser.name}`}!</h1>
+                <form className="profile__form" onSubmit={updateProfile}>
                     <div className="profile__inputs">
                         <div className="profile__input-container">
                         <label htmlFor="profile__name" className="profile__label">Имя</label>
-                        <input type="text" id="profile__name" className="profile__input" name="name" defaultValue="Сергей" required/>
+                        <input type="text" id="profile__name" className="profile__input" name="name" defaultValue={props.currentUser.name} onChange={handleChange} required/>
                         <span className="profile__input_error"></span>
                         </div>
                         <div className="profile__input-container">
                         <label htmlFor="profile__email" className="profile__label">E-mail</label>
-                        <input type="email" id="profile__email" className="profile__input" name="email" defaultValue="pochta@yandex.ru" required/>
+                        <input type="email" id="profile__email" className="profile__input" name="email" defaultValue={props.currentUser.email} onChange={handleChange} required/>
                         <span className="profile__input_error"></span>
                         </div>
                     </div>
-                    <button className="profile__button" type="submit">Редактировать</button>
-                    <button className="profile__button profile__button_signout" type="button" onClick={props.navigateToMain}>Выйти из аккаунта</button>
+                    <button className={`profile__button ${isValid ? "profile__button_active" : "profile__button_disable"}`} type="submit">Редактировать</button>
+                    <button className="profile__button profile__button_signout" type="button" onClick={props.signOut}>Выйти из аккаунта</button>
                 </form>
             </div>
+            <Preloader isLoading={props.isLoading}/>
             <Popup isOpen={props.isOpen} onClose={props.onClose} navigateToMain={props.navigateToMain} navigateToMovies={props.navigateToMovies} navigateToSavedMovies={props.navigateToSavedMovies} navigateToProfile={props.navigateToProfile}/>
         </>        
     );

@@ -1,0 +1,33 @@
+.header__container-nav_active {
+    display: flex;
+}
+
+.header__container-nav_disabled {
+    display: none;
+}
+
+.header__container-center_disabled {
+    display: none;
+}
+
+.header__container-center_active {
+    display: flex;
+    background-color: #073042;
+}
+
+.header__account_disabled {
+    display: none;
+}
+
+.header__account_active {
+    display: flex;
+    background-color: #073042;
+}
+
+.header__films_main {
+    background-color: #073042;
+}
+
+.header__account-text_main {
+    background-color: #073042;
+}

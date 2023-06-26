@@ -5,6 +5,7 @@ import logoAccount from '../../images/logo-account.png';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList'
 import Popup from "../Popup/Popup";
+import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
     return(
@@ -18,8 +19,8 @@ function Movies(props) {
                         <div className="header__container-center">
                             <nav className="header__container-nav">
                             <ul className="header__container-ul">
-                                <li className="header__container-nav_item"><a className="header__films header__films_active" href="/movies">Фильмы</a></li>
-                                <li className="header__container-nav_item"><a className="header__films header__saved-films" href="/saved-movies">Сохранённые фильмы</a></li>
+                                <li className="header__container-nav_item"><button className="header__films header__films_active">Фильмы</button></li>
+                                <li className="header__container-nav_item"><button className="header__films header__saved-films" onClick={props.navigateToSavedMovies}>Сохранённые фильмы</button></li>
                             </ul>
                             </nav>
                         </div>
@@ -31,9 +32,10 @@ function Movies(props) {
                 }
             />
             <main className="movies">
-                <SearchForm/>
-                <MoviesCardList/>
+                <SearchForm filterButton={props.filterButton} setFilterButton={props.setFilterButton} setIsSearchFormText={props.setIsSearchFormText}/>
+                <MoviesCardList array={props.array} savedIds={props.savedIds} likeCard={props.likeCard} plusIndex={props.plusIndex} index={props.index} filterButton={props.filterButton} searchFormText={props.searchFormText}/>
             </main>
+            <Preloader isLoading={props.isLoading}/>
             <Footer/>
             <Popup isOpen={props.isOpen} onClose={props.onClose} navigateToMain={props.navigateToMain} navigateToMovies={props.navigateToMovies} navigateToSavedMovies={props.navigateToSavedMovies} navigateToProfile={props.navigateToProfile} page={"movies"}/>
         </>

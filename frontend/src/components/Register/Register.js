@@ -1,8 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from '../Header/Header';
+import * as auth from '../../utils/auth';
 
 function Register(props) {
+
+    const [formValue, setFormValue] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+    const [errors, setErrors] = React.useState({
+        name: "",
+        email: "",
+        password: ""
+    });
+    const [isValid, setIsValid] = React.useState(false);
+
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const errGeneral = document.querySelector('.sign__error_general');
+        errGeneral.textContent = "";
+        const target = e.target;
+        const {name, value} = target;
+        setFormValue({
+            ...formValue,
+            [name]: value
+        });
+        setErrors({...errors, [name]: target.validationMessage });
+        setIsValid(target.closest("form").checkValidity());
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!formValue.name || !formValue.email || !formValue.password) {
+            return;
+        }
+        if(isValid) {
+            auth.register(formValue.name, formValue.email, formValue.password)
+            .then((res) => {
+                navigate("/signin", {replace: true});
+            })
+            .catch((err) => {
+                console.log(err);
+                setErrors({...errors, 'password': "Что-то пошло не так..." });
+            })
+        }
+    }
+
     return(
         <>
             <Header 
@@ -13,26 +59,28 @@ function Register(props) {
             }
             />
             <div className="sign__component">
-                <form className="sign__form sign__form_register">
+                <form className="sign__form" onSubmit={handleSubmit}>
                     <div className="sign__container">
-                        <label className="sign__label" for="sign__input_name">Имя</label>
-                        <input className="sign__input" id="sign__input_name" type="text" placeholder="Name" required/>
+                        <label className="sign__label" htmlFor="sign__input_name">Имя</label>
+                        <input className="sign__input" id="sign__input_name" type="text" placeholder="Name" name="name" onChange={handleChange} value={formValue.name} required/>
+                        <span className={`sign__error ${errors.name ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.name}`}</span>
                     </div>
                     <div className="sign__container">
-                        <label className="sign__label" for="sign__input_name">E-mail</label>
-                        <input className="sign__input" id="sign__input_name" type="email" placeholder="example@yandex.ru" required/>
+                        <label className="sign__label" htmlFor="sign__input_email">E-mail</label>
+                        <input className="sign__input" id="sign__input_email" type="email" placeholder="example@yandex.ru" name="email" onChange={handleChange} value={formValue.email} required/>
+                        <span className={`sign__error ${errors.email ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.email}`}</span>
                     </div>
                     <div className="sign__container">
-                        <label className="sign__label" for="sign__input_name">Пароль</label>
-                        <input className="sign__input" id="sign__input_name" type="password" placeholder="Password" required/>
-                        <span className="sign__error"></span>
+                        <label className="sign__label" htmlFor="sign__input_password">Пароль</label>
+                        <input className="sign__input" id="sign__input_password" type="password" placeholder="Password" name="password" onChange={handleChange} value={formValue.password} required/>
+                        <span className={`sign__error sign__error_general ${errors.password ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.password}`}</span>
                     </div>
+                    <div className="sign__footer sign__footer_register">
+                        <button type="submit" className="sign__button">Зарегистрироваться</button>
+                        <span className="sign__span">Уже зарегистрированы? <Link className="sign__link" to={'/signin'}>Войти</Link></span>
+                    </div>                    
                 </form>
             </div>
-            <footer className="sign__footer">
-                <button type="submit" className="sign__button" onClick={props.navigateToLogin}>Зарегистрироваться</button>
-                <span className="sign__span">Уже зарегистрированы? <Link className="sign__link" to={'/signin'}>Войти</Link></span>
-            </footer>
         </>
     );
 }

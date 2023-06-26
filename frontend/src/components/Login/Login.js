@@ -1,8 +1,56 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState, useCallback} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from '../Header/Header';
+import * as auth from '../../utils/auth';
 
 function Login(props) {
+    const [formValue, setFormValue] = useState({
+        email: "",
+        password: ""
+    });
+    const [errors, setErrors] = React.useState({
+        email: "",
+        password: ""
+    });
+    const [isValid, setIsValid] = React.useState(false);
+
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const errText = document.querySelector('.sign__error_general');
+        errText.textContent = "";
+        const target = e.target;
+        const {name, value} = target;
+        setFormValue({
+            ...formValue,
+            [name]: value
+        });
+        setErrors({...errors, [name]: target.validationMessage });
+        setIsValid(target.closest("form").checkValidity());
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!formValue.email || !formValue.password){
+          return;
+        }
+        if(isValid) {
+            auth.authorize(formValue.email, formValue.password)
+            .then((res) => {
+                if (res.token) {
+                    localStorage.setItem('jwt', res.token);
+                    setFormValue({username: '', password: ''});
+                    props.handleLogin();
+                    navigate('/movies', {replace: true});
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                setErrors({...errors, 'password': "Что-то пошло не так..." });
+            });
+        }
+    }
+
     return(
         <>
             <Header 
@@ -13,22 +61,23 @@ function Login(props) {
             }
             />
             <div className="sign__component">
-                <form className="sign__form sign__form_login">
+                <form className="sign__form" onSubmit={handleSubmit}>
                     <div className="sign__container">
                         <label className="sign__label" htmlFor="sign__input_name">E-mail</label>
-                        <input className="sign__input" id="sign__input_name" type="email" placeholder="example@yandex.ru" required/>
+                        <input className="sign__input" id="sign__input_name" type="email" placeholder="Example@yandex.ru" name="email" onChange={handleChange} value={formValue.email} required/>
+                        <span className={`sign__error ${errors.email ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.email}`}</span>
                     </div>
                     <div className="sign__container">
-                        <label className="sign__label" htmlFor="sign__input_name">Пароль</label>
-                        <input className="sign__input" id="sign__input_name" type="password" placeholder="Password" required/>
-                        <span className="sign__error"></span>
+                        <label className="sign__label" htmlFor="sign__input_password">Пароль</label>
+                        <input className="sign__input" id="sign__input_password" type="password" placeholder="Password" name="password" onChange={handleChange} value={formValue.password} required/>
+                        <span className={`sign__error sign__error_general ${errors.password ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.password}`}</span>
                     </div>
+                    <div className="sign__footer sign__footer_login">
+                        <button type="submit" className="sign__button">Войти</button>
+                        <span className="sign__span">Ещё не зарегистрированы? <Link className="sign__link" to={'/signup'}>Регистрация</Link></span>
+                    </div>                
                 </form>
             </div>
-            <footer className="sign__footer">
-                <button type="submit" className="sign__button" onClick={props.navigateToMovies}>Войти</button>
-                <span className="sign__span">Ещё не зарегистрированы? <Link className="sign__link" to={'/signup'}>Регистрация</Link></span>
-            </footer>
         </>
     );
 }

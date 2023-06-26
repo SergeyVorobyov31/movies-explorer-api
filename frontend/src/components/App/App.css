@@ -8,6 +8,7 @@
 @import url('../Login/Login.css');
 @import url('../PageNotFound/PageNotFound.css');
 @import url('../Popup/Popup.css');
+@import url('../Preloader/Preloader.css');
 
 #root {
   min-height: 100vh;

@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
+const cors = require('cors');
 const auth = require('./middlewares/auth');
 const { createUser, login } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000, DB_URL } = process.env;
+const { PORT = 3006, DB_URL } = process.env;
 const app = express();
 
 app.use(bodyParser.json());
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(`${DB_URL}`).then(() => console.log('Успешное подключение к MongoDB')).catch((err) => console.error('Ошибка подключения:', err));
 
+app.use(cors());
 app.use(requestLogger);
 
 app.post('/signup', celebrate({

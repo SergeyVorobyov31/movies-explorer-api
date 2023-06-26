@@ -71,6 +71,12 @@
     overflow: hidden;
 }
 
+.profile__input:-webkit-autofill {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 40rem #202020 inset;
+    caret-color: #fff;
+}
+
 .profile__input:focus {
     opacity: 0.7;
 }
@@ -99,6 +105,10 @@
     padding: 0;
     cursor: pointer;
     transition: all .2s ease;
+}
+
+.profile__button_disable {
+    color: #424242;
 }
 
 .profile__button:hover {
