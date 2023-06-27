@@ -18,7 +18,6 @@ export const register = (name, email, password) => {
     })
     .then(res => _checkResponse(res))
     .then((res) => {
-        console.log(res);
         return res;
     })
 };
