@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3006/';
+export const BASE_URL = 'https://api.movies-explorer.net.nomoredomains.rocks/';
 
 const _checkResponse = (res) => {
     if (res.ok) {

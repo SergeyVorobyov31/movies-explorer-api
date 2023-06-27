@@ -28,7 +28,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const api = new MainApi({
-    baseUrl: 'http://localhost:3006',
+    baseUrl: 'https://api.movies-explorer.net.nomoredomains.rocks',
     headers: {
       authorization: `${localStorage.jwt}`,
       'Content-Type': 'application/json'

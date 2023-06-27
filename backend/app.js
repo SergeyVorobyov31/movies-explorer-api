@@ -9,7 +9,7 @@ const { createUser, login } = require('./controllers/users');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3006, DB_URL } = process.env;
+const { PORT = 3000, DB_URL } = process.env;
 const app = express();
 
 app.use(bodyParser.json());
