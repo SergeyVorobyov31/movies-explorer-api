@@ -19,6 +19,11 @@ function SearchForm(props) {
         e.preventDefault();
         const search = document.querySelector(".searchForm__input");
         props.setIsSearchFormText(search.value);
+        if (search.value === "") {
+            props.setButtonMore(true);
+        } else {
+            props.setButtonMore(false);
+        }
     }
 
     return(

@@ -32,8 +32,8 @@ function Movies(props) {
                 }
             />
             <main className="movies">
-                <SearchForm filterButton={props.filterButton} setFilterButton={props.setFilterButton} setIsSearchFormText={props.setIsSearchFormText}/>
-                <MoviesCardList array={props.array} savedIds={props.savedIds} likeCard={props.likeCard} plusIndex={props.plusIndex} index={props.index} filterButton={props.filterButton} searchFormText={props.searchFormText}/>
+                <SearchForm filterButton={props.filterButton} setFilterButton={props.setFilterButton} setIsSearchFormText={props.setIsSearchFormText} setButtonMore={props.setButtonMore}/>
+                <MoviesCardList array={props.array} savedIds={props.savedIds} likeCard={props.likeCard} plusIndex={props.plusIndex} index={props.index} filterButton={props.filterButton} searchFormText={props.searchFormText} setButtonMore={props.setButtonMore} buttonMore={props.buttonMore}/>
             </main>
             <Preloader isLoading={props.isLoading}/>
             <Footer/>

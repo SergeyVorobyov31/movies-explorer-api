@@ -22,10 +22,11 @@ function App() {
   const [currentUser, setCurentUser] = useState({});
   const [cards, setInitialCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
-  const [index, setIndex] = useState(13);
+  const [index, setIndex] = useState();
   const [filterButton, setFilterButton] = useState(false);
   const [searchFormText, setIsSearchFormText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [buttonMore, setButtonMore] = useState(true);
 
   const api = new MainApi({
     baseUrl: 'https://api.movies-explorer.net.nomoredomains.rocks',
@@ -50,7 +51,7 @@ function App() {
 
   useEffect(() => {
     setInitialCountCards();
-  }, [index]);
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
@@ -114,6 +115,8 @@ function App() {
       } else {
         setIndex(9);
       }
+    } else {
+      setIndex(13);
     }
   }
 
@@ -178,6 +181,7 @@ function App() {
     navigate('/movies', {replace: true});
     setFilterButton(false);
     setIsSearchFormText("");
+    setButtonMore(true);
     closePopup()
   }
 
@@ -253,6 +257,8 @@ function App() {
               setIsSearchFormText={setIsSearchFormText}
               searchFormText={searchFormText}
               isLoading={isLoading}
+              buttonMore={buttonMore}
+              setButtonMore={setButtonMore}
             />
           }/>
           <Route path='/saved-movies' element={
@@ -270,6 +276,7 @@ function App() {
               setFilterButton={setFilterButton}
               setIsSearchFormText={setIsSearchFormText}
               searchFormText={searchFormText}
+              setButtonMore={setButtonMore}
             />
           }/>
           <Route path='/profile' element={

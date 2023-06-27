@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import MoviesCard from '../MoviesCard/MoviesCard'
 
 function MoviesCardList(props) {
-    const [buttonMore, setButtonMore] = useState(false);
 
     function liked(card) {
         let like = false
@@ -13,8 +12,11 @@ function MoviesCardList(props) {
     }
 
     function moreFilms() {
-        setButtonMore(true);
-        props.plusIndex();
+        props.setButtonMore(true);
+        props.plusIndex(props.index);
+        if (props.array.length <= props.index) {
+            props.setButtonMore(false);
+        }
     }
 
     return(
@@ -41,7 +43,7 @@ function MoviesCardList(props) {
                                         />
                                      );
                                 }
-                                if(buttonMore) {
+                                if(props.buttonMore) {
                                     for (let index = props.index; index < props.index + 3; props.index++) {
                                         return(
                                             <MoviesCard
@@ -97,7 +99,7 @@ function MoviesCardList(props) {
                 })
             } 
             </ul>
-            <button className={`moviesCardList__button ${props.array.length > props.index ? "moviesCardList__button_active" : "moviesCardList__button_disable"}`} type="button" onClick={moreFilms}>Еще</button>
+            <button className={`moviesCardList__button ${props.buttonMore ? "moviesCardList__button_active" : "moviesCardList__button_disable"}`} type="button" onClick={moreFilms}>Еще</button>
         </section>
     );
 }
