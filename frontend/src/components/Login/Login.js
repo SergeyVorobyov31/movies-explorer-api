@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from "react";
+import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from '../Header/Header';
 import * as auth from '../../utils/auth';
@@ -14,6 +14,8 @@ function Login(props) {
     });
     const [isValid, setIsValid] = React.useState(false);
 
+    const regex = /@[a-z0-9.-]*\./i;
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -27,6 +29,10 @@ function Login(props) {
         });
         setErrors({...errors, [name]: target.validationMessage });
         setIsValid(target.closest("form").checkValidity());
+        if (target.value.match(regex) === null && target.classList.contains("sign__input_email")) {
+            setIsValid(false);
+            setErrors({...errors, 'email': "E-mail является не валидным" });
+        }
     }
 
     const handleSubmit = (e) => {
@@ -63,8 +69,8 @@ function Login(props) {
             <div className="sign__component">
                 <form className="sign__form" onSubmit={handleSubmit}>
                     <div className="sign__container">
-                        <label className="sign__label" htmlFor="sign__input_name">E-mail</label>
-                        <input className="sign__input" id="sign__input_name" type="email" placeholder="Example@yandex.ru" name="email" onChange={handleChange} value={formValue.email} required/>
+                        <label className="sign__label" htmlFor="sign__input_email">E-mail</label>
+                        <input className="sign__input sign__input_email" id="sign__input_email" type="email" placeholder="Example@yandex.ru" name="email" onChange={handleChange} value={formValue.email} required/>
                         <span className={`sign__error ${errors.email ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.email}`}</span>
                     </div>
                     <div className="sign__container">
@@ -73,7 +79,7 @@ function Login(props) {
                         <span className={`sign__error sign__error_general ${errors.password ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.password}`}</span>
                     </div>
                     <div className="sign__footer sign__footer_login">
-                        <button type="submit" className="sign__button">Войти</button>
+                        <button type="submit" className={`sign__button ${isValid ? "sign__button_active" : "sign__button_disable"}`}>Войти</button>
                         <span className="sign__span">Ещё не зарегистрированы? <Link className="sign__link" to={'/signup'}>Регистрация</Link></span>
                     </div>                
                 </form>

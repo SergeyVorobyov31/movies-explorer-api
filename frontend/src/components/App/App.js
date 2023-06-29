@@ -199,14 +199,12 @@ function App() {
 
   function navigateToMovies() {
     navigate('/movies', {replace: true});
-    // setIsSearchFormText("");
     setButtonMore(true);
     closePopup()
   }
 
   function navigateToSavedMovies() {
     navigate('/saved-movies', {replace: true});
-    // setIsSearchFormText("");
     closePopup()
   }
 

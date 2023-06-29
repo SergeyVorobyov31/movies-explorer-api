@@ -16,6 +16,8 @@ function Profile(props) {
     });
     const [isValid, setIsValid] = React.useState(false);
 
+    const regex = /@[a-z0-9.-]*\./i;
+
     const handleChange = (e) => {
         const target = e.target;
         const {name, value} = target;
@@ -25,10 +27,11 @@ function Profile(props) {
         });
         setErrors({...errors, [name]: target.validationMessage });
         setIsValid(target.closest("form").checkValidity());
-        if(target.value === props.currentUser.name || target.value === props.currentUser.email) {
+        if(target.value === props.currentUser.name || target.value === props.currentUser.email || (target.value.match(regex) === null && target.classList.contains("profile__input_email"))) {
             setIsValid(false);
         }
     }
+
 
     function updateProfile(e) {
         if (isValid) {
@@ -78,7 +81,7 @@ function Profile(props) {
                         </div>
                         <div className="profile__input-container">
                         <label htmlFor="profile__email" className="profile__label">E-mail</label>
-                        <input type="email" id="profile__email" className="profile__input" name="email" defaultValue={props.currentUser.email} onChange={handleChange} required/>
+                        <input type="email" id="profile__email" className="profile__input profile__input_email" name="email" defaultValue={props.currentUser.email} onChange={handleChange} required/>
                         <span className="profile__input_error"></span>
                         </div>
                     </div>

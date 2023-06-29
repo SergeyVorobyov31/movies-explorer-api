@@ -17,6 +17,8 @@ function Register(props) {
     });
     const [isValid, setIsValid] = React.useState(false);
 
+    const regex = /@[a-z0-9.-]*\./i;
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -30,13 +32,19 @@ function Register(props) {
         });
         setErrors({...errors, [name]: target.validationMessage });
         setIsValid(target.closest("form").checkValidity());
+        if (target.value.match(regex) === null && target.classList.contains("sign__input_email")) {
+            setIsValid(false);
+            setErrors({...errors, 'email': "E-mail является не валидным" });
+        }
     }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!formValue.name || !formValue.email || !formValue.password) {
             return;
         }
+        console.log(isValid);
         if(isValid) {
             auth.register(formValue.name, formValue.email, formValue.password)
             .then((res) => {
@@ -67,7 +75,7 @@ function Register(props) {
                     </div>
                     <div className="sign__container">
                         <label className="sign__label" htmlFor="sign__input_email">E-mail</label>
-                        <input className="sign__input" id="sign__input_email" type="email" placeholder="example@yandex.ru" name="email" onChange={handleChange} value={formValue.email} required/>
+                        <input className="sign__input sign__input_email" id="sign__input_email" type="email" placeholder="example@yandex.ru" name="email" onChange={handleChange} value={formValue.email} required/>
                         <span className={`sign__error ${errors.email ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.email}`}</span>
                     </div>
                     <div className="sign__container">
@@ -76,7 +84,7 @@ function Register(props) {
                         <span className={`sign__error sign__error_general ${errors.password ? "sign__error_active" :" sign__error_disable"}`}>{`${errors.password}`}</span>
                     </div>
                     <div className="sign__footer sign__footer_register">
-                        <button type="submit" className="sign__button">Зарегистрироваться</button>
+                        <button type="submit" className={`sign__button ${isValid ? "sign__button_active" : "sign__button_disable"}`}>Зарегистрироваться</button>
                         <span className="sign__span">Уже зарегистрированы? <Link className="sign__link" to={'/signin'}>Войти</Link></span>
                     </div>                    
                 </form>
