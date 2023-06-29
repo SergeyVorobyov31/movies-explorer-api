@@ -23,7 +23,8 @@ function App() {
   const [cards, setInitialCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [index, setIndex] = useState();
-  const [filterButton, setFilterButton] = useState(false);
+  const [filterButton, setFilterButton] = useState();
+  const [savedFilterButton, setSavedFilterButton] = useState(false);
   const [searchFormText, setIsSearchFormText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [buttonMore, setButtonMore] = useState(true);
@@ -73,6 +74,8 @@ function App() {
       fetchUserData();
       getDefaultCard();
       getSavedMovies();
+      setFilterButton(localStorage.filterButton);
+      setSavedFilterButton(localStorage.savedFilterButton);
     }
   }, [loggedIn]);
 
@@ -144,12 +147,17 @@ function App() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('email');
     localStorage.removeItem('name');
+    localStorage.removeItem('filterButton');
+    localStorage.removeItem('savedFilterButton');
     setLoggedIn(false);
-    navigate("/signin", {replace:true});
+    navigate("/", {replace:true});
   }
 
   const handleLogin = () => {
     setLoggedIn(true);
+    setSavedFilterButton(false)
+    setFilterButton(false);
+    localStorage.setItem('savedFilterButton', savedFilterButton);
   }
 
   function plusIndex() {
@@ -179,7 +187,6 @@ function App() {
 
   function navigateToMovies() {
     navigate('/movies', {replace: true});
-    setFilterButton(false);
     setIsSearchFormText("");
     setButtonMore(true);
     closePopup()
@@ -187,7 +194,6 @@ function App() {
 
   function navigateToSavedMovies() {
     navigate('/saved-movies', {replace: true});
-    setFilterButton(false);
     setIsSearchFormText("");
     closePopup()
   }
@@ -272,8 +278,8 @@ function App() {
               onClose={closePopup}
               deleteMovie={deleteMovie}
               savedIds={savedIds}
-              filterButton={filterButton}
-              setFilterButton={setFilterButton}
+              savedFilterButton={savedFilterButton}
+              setSavedFilterButton={setSavedFilterButton}
               setIsSearchFormText={setIsSearchFormText}
               searchFormText={searchFormText}
               setButtonMore={setButtonMore}

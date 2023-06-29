@@ -24,7 +24,7 @@ function MoviesCardList(props) {
             <ul className="elements__list">
             {
                 props.array.map((item) => {
-                    if (props.filterButton === false) {
+                    if (localStorage.filterButton.startsWith("false")) {
                         if (props.searchFormText === "") {
                             while((item.id < props.index) && (item.id < 102)) {
                                 while(item.id < props.index) {
@@ -80,20 +80,37 @@ function MoviesCardList(props) {
                         }
                     } else {
                         if (item.duration < 41) {
-                            return(
-                                <MoviesCard
-                                    nameClass="movies"
-                                    key={item.id}
-                                    card={item}
-                                    url={item.trailerLink}
-                                    image={item.image.url}
-                                    name={item.nameRU}
-                                    duration={item.duration}
-                                    likeCard={props.likeCard}
-                                    savedIds={props.savedIds}
-                                    like={liked(item)}
-                                />
-                            );
+                            if (props.searchFormText === "") {
+                                return(
+                                    <MoviesCard
+                                        nameClass="movies"
+                                        key={item.id}
+                                        card={item}
+                                        url={item.trailerLink}
+                                        image={item.image.url}
+                                        name={item.nameRU}
+                                        duration={item.duration}
+                                        likeCard={props.likeCard}
+                                        savedIds={props.savedIds}
+                                        like={liked(item)}
+                                    />
+                                );
+                            } else if ((item.nameRU.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`))) {
+                                return(
+                                    <MoviesCard
+                                        nameClass="movies"
+                                        key={item.id}
+                                        card={item}
+                                        url={item.trailerLink}
+                                        image={item.image.url}
+                                        name={item.nameRU}
+                                        duration={item.duration}
+                                        likeCard={props.likeCard}
+                                        savedIds={props.savedIds}
+                                        like={liked(item)}
+                                    />
+                                );
+                            }
                         }
                     }
                 })

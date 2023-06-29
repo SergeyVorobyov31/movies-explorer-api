@@ -107,7 +107,7 @@
     cursor: pointer;
 }
 
-.searchForm__filter-invisible-checkbox:checked + .searchForm__filter-visible-checkbox {
+.searchForm__filter-visible-checkbox_active {
     background-color: #3DDC84;
     left: 18px;
 }
