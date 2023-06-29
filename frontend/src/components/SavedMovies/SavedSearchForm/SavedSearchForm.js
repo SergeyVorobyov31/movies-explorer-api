@@ -2,6 +2,7 @@ import React from "react";
 
 function SavedSearchForm(props) {
     localStorage.setItem('savedFilterButton', props.savedFilterButton);
+    localStorage.setItem('savedSearchFormText', props.savedSearchFormText);
 
     function filterActive() {
         const filter = document.querySelector(".searchForm__filter");
@@ -21,7 +22,8 @@ function SavedSearchForm(props) {
     function submitForm(e) {
         e.preventDefault();
         const search = document.querySelector(".searchForm__input");
-        props.setIsSearchFormText(search.value);
+        props.setIsSavedSearchFormText(search.value);
+        localStorage.setItem('savedSearchFormText', search.value);
         if (search.value === "") {
             props.setButtonMore(true);
         } else {
@@ -33,7 +35,7 @@ function SavedSearchForm(props) {
         <section className="searchForm">
             <form className="searchForm_form" onSubmit={submitForm}>
                 <div className="searchForm__container">
-                    <input className="searchForm__input" type="text" placeholder="Фильм" name="film" id="film"/>
+                    <input className="searchForm__input" type="text" placeholder="Фильм" name="film" id="film" defaultValue={localStorage.savedSearchFormText}/>
                     <button className="searchForm__button" type="submit">Поиск</button>
                 </div>
             </form>

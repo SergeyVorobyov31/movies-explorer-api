@@ -31,8 +31,8 @@ function SavedMovies(props) {
                 }
             />
             <main className="savedMovies">
-                <SavedSearchForm savedFilterButton={props.savedFilterButton} setSavedFilterButton={props.setSavedFilterButton} setIsSearchFormText={props.setIsSearchFormText} setButtonMore={props.setButtonMore}/>
-                <SavedMoviesCardList array={props.array} savedIds={props.savedIds} deleteMovie={props.deleteMovie} savedFilterButton={props.savedFilterButton} setSavedFilterButton={props.setSavedFilterButton} searchFormText={props.searchFormText}/>
+                <SavedSearchForm savedFilterButton={props.savedFilterButton} setSavedFilterButton={props.setSavedFilterButton} savedSearchFormText={props.savedSearchFormText} setIsSavedSearchFormText={props.setIsSavedSearchFormText} setButtonMore={props.setButtonMore}/>
+                <SavedMoviesCardList array={props.array} savedIds={props.savedIds} deleteMovie={props.deleteMovie} savedFilterButton={props.savedFilterButton} setSavedFilterButton={props.setSavedFilterButton} savedSearchFormText={props.savedSearchFormText}/>
             </main>
             <Footer/>
             <Popup isOpen={props.isOpen} onClose={props.onClose} navigateToMain={props.navigateToMain} navigateToMovies={props.navigateToMovies} navigateToSavedMovies={props.navigateToSavedMovies} navigateToProfile={props.navigateToProfile} page={"saved-movies"}/>

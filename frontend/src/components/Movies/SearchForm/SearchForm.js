@@ -2,6 +2,7 @@ import React from "react";
 
 function SearchForm(props) {
     localStorage.setItem('filterButton', props.filterButton);
+    localStorage.setItem('searchFormText', props.searchFormText);
 
     function filterActive() {
         const filter = document.querySelector(".searchForm__filter");
@@ -22,6 +23,7 @@ function SearchForm(props) {
         e.preventDefault();
         const search = document.querySelector(".searchForm__input");
         props.setIsSearchFormText(search.value);
+        localStorage.setItem('searchFormText', search.value);
         if (search.value === "") {
             props.setButtonMore(true);
         } else {
@@ -33,7 +35,7 @@ function SearchForm(props) {
         <section className="searchForm">
             <form className="searchForm_form" onSubmit={submitForm}>
                 <div className="searchForm__container">
-                    <input className="searchForm__input" type="text" placeholder="Фильм" name="film" id="film"/>
+                    <input className="searchForm__input" type="text" placeholder="Фильм" name="film" id="film" defaultValue={localStorage.searchFormText}/>
                     <button className="searchForm__button" type="submit">Поиск</button>
                 </div>
             </form>

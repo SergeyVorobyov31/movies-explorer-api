@@ -8,7 +8,7 @@ function SavedMoviesCardList(props) {
             {
                 props.array.map((item) => {
                     if (localStorage.savedFilterButton.startsWith("false")) {
-                        if (props.searchFormText === "") {
+                        if (props.savedSearchFormText === "") {
                             while(item.movieId < 102) {
                                 return( 
                                     <MoviesCard
@@ -25,7 +25,7 @@ function SavedMoviesCardList(props) {
                                     />
                                  );
                             }
-                        } else if ((item.nameRU.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`))) {
+                        } else if ((item.nameRU.toLowerCase().includes(`${props.savedSearchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.savedSearchFormText.toLowerCase()}`))) {
                             return( 
                                 <MoviesCard
                                     nameClass="savedMovies"
@@ -43,7 +43,7 @@ function SavedMoviesCardList(props) {
                         }
                     } else {
                         if (item.duration < 41) {
-                            if (props.searchFormText === "") {
+                            if (props.savedSearchFormText === "") {
                                 return( 
                                     <MoviesCard
                                         nameClass="savedMovies"
@@ -58,7 +58,7 @@ function SavedMoviesCardList(props) {
                                         deleteMovie={props.deleteMovie}
                                     />
                                 );
-                            } else if ((item.nameRU.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`))) {
+                            } else if ((item.nameRU.toLowerCase().includes(`${props.savedSearchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.savedSearchFormText.toLowerCase()}`))) {
                                 return( 
                                     <MoviesCard
                                         nameClass="savedMovies"

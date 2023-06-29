@@ -26,6 +26,7 @@ function App() {
   const [filterButton, setFilterButton] = useState();
   const [savedFilterButton, setSavedFilterButton] = useState(false);
   const [searchFormText, setIsSearchFormText] = useState("");
+  const [savedSearchFormText, setIsSavedSearchFormText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [buttonMore, setButtonMore] = useState(true);
 
@@ -76,6 +77,11 @@ function App() {
       getSavedMovies();
       setFilterButton(localStorage.filterButton);
       setSavedFilterButton(localStorage.savedFilterButton);
+      setIsSearchFormText(localStorage.searchFormText);
+      setIsSavedSearchFormText(localStorage.savedSearchFormText);
+      if (localStorage.searchFormText !== "") {
+        setButtonMore(false);
+      }
     }
   }, [loggedIn]);
 
@@ -149,6 +155,10 @@ function App() {
     localStorage.removeItem('name');
     localStorage.removeItem('filterButton');
     localStorage.removeItem('savedFilterButton');
+    localStorage.removeItem('searchFormText');
+    localStorage.removeItem('savedSearchFormText');
+    setSavedFilterButton(false)
+    setIsSavedSearchFormText("");
     setLoggedIn(false);
     navigate("/", {replace:true});
   }
@@ -157,7 +167,9 @@ function App() {
     setLoggedIn(true);
     setSavedFilterButton(false)
     setFilterButton(false);
+    setIsSearchFormText("");
     localStorage.setItem('savedFilterButton', savedFilterButton);
+    localStorage.setItem('savedSearchFormText', savedSearchFormText);
   }
 
   function plusIndex() {
@@ -187,14 +199,14 @@ function App() {
 
   function navigateToMovies() {
     navigate('/movies', {replace: true});
-    setIsSearchFormText("");
+    // setIsSearchFormText("");
     setButtonMore(true);
     closePopup()
   }
 
   function navigateToSavedMovies() {
     navigate('/saved-movies', {replace: true});
-    setIsSearchFormText("");
+    // setIsSearchFormText("");
     closePopup()
   }
 
@@ -280,8 +292,8 @@ function App() {
               savedIds={savedIds}
               savedFilterButton={savedFilterButton}
               setSavedFilterButton={setSavedFilterButton}
-              setIsSearchFormText={setIsSearchFormText}
-              searchFormText={searchFormText}
+              setIsSavedSearchFormText={setIsSavedSearchFormText}
+              savedSearchFormText={savedSearchFormText}
               setButtonMore={setButtonMore}
             />
           }/>
