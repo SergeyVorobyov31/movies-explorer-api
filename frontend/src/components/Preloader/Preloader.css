@@ -64,7 +64,7 @@
     height: 100px;
     position: fixed;
     top: calc(50% - 50px);
-    left: 50%;
+    left: calc(50% - 50px);
     background: #202020;
     border-radius: 50px;
 }
@@ -89,4 +89,11 @@
     z-index: 10;
     background: #202020;
     animation: preloader-inside-red 1s ease-in-out infinite;
+}
+
+
+@media screen and (min-width: 250px) and (max-width: 1230px) {
+    .preloader__round {
+        left: calc(50% - 70px);
+    }
 }
