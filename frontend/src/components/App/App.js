@@ -212,7 +212,11 @@ function App() {
 
   function navigateToMovies() {
     navigate('/movies', {replace: true});
-    setButtonMore(true);
+    if (searchFormText === "") {
+      setButtonMore(true);
+    } else {
+      setButtonMore(false);
+    }
     closePopup()
   }
 
