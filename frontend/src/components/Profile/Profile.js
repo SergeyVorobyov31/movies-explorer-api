@@ -15,6 +15,7 @@ function Profile(props) {
         email: ""
     });
     const [isValid, setIsValid] = React.useState(false);
+    const [successfulMessage, setSuccessfulMessage] = useState('');
 
     const regex = /@[a-z0-9.-]*\./i;
 
@@ -27,21 +28,31 @@ function Profile(props) {
         });
         setErrors({...errors, [name]: target.validationMessage });
         setIsValid(target.closest("form").checkValidity());
-        if(target.value === props.currentUser.name || target.value === props.currentUser.email || (target.value.match(regex) === null && target.classList.contains("profile__input_email"))) {
+        if(target.value === props.currentUser.name) {
             setIsValid(false);
+            setErrors({...errors, 'name': "Указано текущее имя" });
+        } else if (target.value === props.currentUser.email) {
+            setIsValid(false);
+            setErrors({...errors, 'email': "Указан текущий E-mail" });
+        } else if (target.value.match(regex) === null && target.classList.contains("profile__input_email")) {
+            setIsValid(false);
+            setErrors({...errors, 'email': "E-mail является не валидным" });
         }
     }
 
 
     function updateProfile(e) {
+        e.preventDefault();
         if (isValid) {
             const name = document.getElementById('profile__name');
             const email = document.getElementById('profile__email');
             if (name.value !== props.currentUser.name || email.value !== props.currentUser.email) {
                 props.updateUser(name.value, email.value);
+                setSuccessfulMessage("Профиль успешно редактирован");
+                setIsValid(false);
             } 
         } else {
-            e.preventDefault();
+            setSuccessfulMessage('');
             return;
         }
     }
@@ -77,14 +88,15 @@ function Profile(props) {
                         <div className="profile__input-container">
                         <label htmlFor="profile__name" className="profile__label">Имя</label>
                         <input type="text" id="profile__name" className="profile__input" name="name" defaultValue={props.currentUser.name} onChange={handleChange} required/>
-                        <span className="profile__input_error"></span>
+                        <span className="profile__input_error">{errors.name}</span>
                         </div>
                         <div className="profile__input-container">
                         <label htmlFor="profile__email" className="profile__label">E-mail</label>
                         <input type="email" id="profile__email" className="profile__input profile__input_email" name="email" defaultValue={props.currentUser.email} onChange={handleChange} required/>
-                        <span className="profile__input_error"></span>
+                        <span className="profile__input_error">{errors.email}</span>
                         </div>
                     </div>
+                    <span className="profile__successful-message">{successfulMessage}</span>
                     <button className={`profile__button ${isValid ? "profile__button_active" : "profile__button_disable"}`} type="submit">Редактировать</button>
                     <button className="profile__button profile__button_signout" type="button" onClick={props.signOut}>Выйти из аккаунта</button>
                 </form>

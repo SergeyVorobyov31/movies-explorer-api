@@ -44,7 +44,6 @@ function Register(props) {
         if (!formValue.name || !formValue.email || !formValue.password) {
             return;
         }
-        console.log(isValid);
         if(isValid) {
             auth.register(formValue.name, formValue.email, formValue.password)
             .then((res) => {

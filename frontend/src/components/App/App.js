@@ -72,6 +72,19 @@ function App() {
     const token = localStorage.getItem('jwt');
     if (token && loggedIn) {
       navigate("/movies", {replace: true})
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token && loggedIn) {
+      fetchUserData();
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if (token && loggedIn) {
       fetchUserData();
       getDefaultCard();
       getSavedMovies();

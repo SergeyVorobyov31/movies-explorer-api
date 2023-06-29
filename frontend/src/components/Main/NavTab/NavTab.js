@@ -2,22 +2,6 @@ import React from 'react';
 import logoAccount from '../../../images/logo-account.png';
 
 function NavTab(props) {
-
-    if (props.loggedIn) {
-        // const headerMovies = document.querySelector(".header__container-center_disabled");
-        // const headerAccount = document.querySelector(".header__account_disabled");
-        // console.log(headerAccount);
-        // if ((headerAccount !== null) && (headerMovies !== null)) {
-        //     console.log(1);
-            // headerMovies.classList.remove("header__container-center_disabled");
-            // headerMovies.classList.add("header__container-center_active");
-            // headerAccount.classList.remove("header__account_disabled");
-            // headerAccount.classList.add("header__account_active");
-        // }
-    }
-
-
-
     return(
         <>
             <div className={`header__container-center header__container-center_${props.loggedIn ? "active": "disabled"}`}>
