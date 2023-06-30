@@ -12,7 +12,13 @@ function SearchForm(props) {
             if (filterText.classList.contains("searchForm__filter-text_active")) {
                 props.setFilterButton(true);
                 localStorage.setItem('filterButton', props.filterButton);
+                if (localStorage.searchFormText === "") {
+                    props.setButtonMore(false);
+                }
             } else {
+                if (localStorage.searchFormText === "") {
+                    props.setButtonMore(true);
+                }
                 props.setFilterButton(false);
                 localStorage.setItem('filterButton', props.filterButton);
             }
@@ -25,7 +31,11 @@ function SearchForm(props) {
         props.setIsSearchFormText(search.value);
         localStorage.setItem('searchFormText', search.value);
         if (search.value === "") {
-            props.setButtonMore(true);
+            if (localStorage.filterButton.startsWith("true")) {
+                props.setButtonMore(false);
+            } else {
+                props.setButtonMore(true);
+            }
         } else {
             props.setButtonMore(false);
         }

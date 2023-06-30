@@ -8,6 +8,7 @@ import Popup from "../Popup/Popup";
 import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
+
     return(
         <>
             <Header

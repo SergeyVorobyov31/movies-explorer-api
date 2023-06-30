@@ -29,7 +29,7 @@ function App() {
   const [savedSearchFormText, setIsSavedSearchFormText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [buttonMore, setButtonMore] = useState(true);
-
+  
   const api = new MainApi({
     baseUrl: 'https://api.movies-explorer.net.nomoredomains.rocks',
     headers: {
@@ -93,6 +93,9 @@ function App() {
       setIsSearchFormText(localStorage.searchFormText);
       setIsSavedSearchFormText(localStorage.savedSearchFormText);
       if (localStorage.searchFormText !== "") {
+        setButtonMore(false);
+      }
+      if (localStorage.searchFormText === "" && localStorage.filterButton.startsWith("true")) {
         setButtonMore(false);
       }
     }
