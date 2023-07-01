@@ -23,12 +23,13 @@ function App() {
   const [cards, setInitialCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
   const [index, setIndex] = useState();
-  const [filterButton, setFilterButton] = useState();
+  const [filterButton, setFilterButton] = useState(localStorage.filterButton);
   const [savedFilterButton, setSavedFilterButton] = useState(false);
-  const [searchFormText, setIsSearchFormText] = useState("");
+  const [searchFormText, setIsSearchFormText] = useState(localStorage.searchFormText);
   const [savedSearchFormText, setIsSavedSearchFormText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [buttonMore, setButtonMore] = useState(true);
+  const [successfulMessage, setSuccessfulMessage] = useState('');
   
   const api = new MainApi({
     baseUrl: 'https://api.movies-explorer.net.nomoredomains.rocks',
@@ -71,14 +72,6 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if (token && loggedIn) {
-      navigate("/movies", {replace: true})
-    }
-  }, [loggedIn]);
-
-  useEffect(() => {
-    const token = localStorage.getItem('jwt');
-    if (token && loggedIn) {
-      fetchUserData();
     }
   }, [currentUser]);
 
@@ -107,6 +100,7 @@ function App() {
     .then(data => {
       if(data) {
         localStorage.setItem('name', data.name);
+        localStorage.setItem('email', data.email);
         setCurentUser({name:localStorage.name, email:localStorage.email});
       }
     })
@@ -200,9 +194,18 @@ function App() {
     api.updateUser(name, email)
     .then(res => {
       setIsLoading(false);
-      return res;
+      setCurentUser({
+        name: res.name,
+        email: res.email
+      })
+      setSuccessfulMessage('Профиль успешно редактирован!');
+      setTimeout(setSuccessfulMessage, 3000, "");
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err);
+      setSuccessfulMessage(err);
+      setTimeout(setSuccessfulMessage, 3000, "");
+    })
     .finally(() => {
       setIsLoading(false);
     })
@@ -214,7 +217,7 @@ function App() {
   }
 
   function navigateToMovies() {
-    navigate('/movies', {replace: true});
+    navigate('/movies', {replace: false});
     if (searchFormText === "") {
       setButtonMore(true);
     } else {
@@ -229,6 +232,7 @@ function App() {
   }
 
   function navigateToProfile() {
+    setSuccessfulMessage("");
     navigate('/profile', {replace: true});
     closePopup()
   }
@@ -328,6 +332,9 @@ function App() {
                 onClose={closePopup}
                 updateUser={updateUser}
                 isLoading={isLoading}
+
+                successfulMessage={successfulMessage}
+                setSuccessfulMessage={setSuccessfulMessage}
               />
             </CurrentUserContext.Provider>
           }/>

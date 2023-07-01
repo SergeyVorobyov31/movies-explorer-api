@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRouteElement = (props) => {
   return (
-    props.loggedIn ? <Outlet /> : <Navigate to="/" replace/>
+    localStorage.jwt ? <Outlet /> : <Navigate to="/" replace/>
 )}
 
 export default ProtectedRouteElement;

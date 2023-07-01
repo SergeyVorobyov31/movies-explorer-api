@@ -15,11 +15,11 @@ function Profile(props) {
         email: ""
     });
     const [isValid, setIsValid] = React.useState(false);
-    const [successfulMessage, setSuccessfulMessage] = useState('');
 
     const regex = /@[a-z0-9.-]*\./i;
 
     const handleChange = (e) => {
+        props.setSuccessfulMessage("");
         const target = e.target;
         const {name, value} = target;
         setFormValue({
@@ -47,12 +47,10 @@ function Profile(props) {
             const name = document.getElementById('profile__name');
             const email = document.getElementById('profile__email');
             if (name.value !== props.currentUser.name || email.value !== props.currentUser.email) {
-                props.updateUser(name.value, email.value);
-                setSuccessfulMessage("Профиль успешно редактирован");
+                props.updateUser(name.value, email.value)
                 setIsValid(false);
             } 
         } else {
-            setSuccessfulMessage('');
             return;
         }
     }
@@ -96,7 +94,7 @@ function Profile(props) {
                         <span className="profile__input_error">{errors.email}</span>
                         </div>
                     </div>
-                    <span className="profile__successful-message">{successfulMessage}</span>
+                    <span className="profile__successful-message">{props.successfulMessage}</span>
                     <button className={`profile__button ${isValid ? "profile__button_active" : "profile__button_disable"}`} type="submit">Редактировать</button>
                     <button className="profile__button profile__button_signout" type="button" onClick={props.signOut}>Выйти из аккаунта</button>
                 </form>

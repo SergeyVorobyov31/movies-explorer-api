@@ -5,7 +5,7 @@ function SavedSearchForm(props) {
     localStorage.setItem('savedSearchFormText', props.savedSearchFormText);
 
     function filterActive() {
-        const filter = document.querySelector(".searchForm__filter");
+        const filter = document.querySelector(".searchForm__filter-label");
         const filterText = document.querySelector(".searchForm__filter-text");
         filter.addEventListener("click", () => {
             filterText.classList.toggle("searchForm__filter-text_active");

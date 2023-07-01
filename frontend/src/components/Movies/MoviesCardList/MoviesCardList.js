@@ -3,6 +3,8 @@ import MoviesCard from '../MoviesCard/MoviesCard'
 
 function MoviesCardList(props) {
 
+    // console.log(localStorage);
+
     function liked(card) {
         let like = false
         if(props.savedIds.has(card.id)) {
