@@ -299,9 +299,7 @@ function App() {
               isOpen={isPopup}
               onClose={closePopup}
               likeCard={saveMovie}
-
               deleteMovie={deleteMovie}
-
               savedIds={savedIds}
               index={index}
               plusIndex={plusIndex}
@@ -323,10 +321,7 @@ function App() {
               onPopup={popupOpen}
               isOpen={isPopup}
               onClose={closePopup}
-              // deleteMovie={deleteMovie}
-
               deleteSavedMovie={deleteSavedMovie}
-
               savedIds={savedIds}
               savedFilterButton={savedFilterButton}
               setSavedFilterButton={setSavedFilterButton}
@@ -348,7 +343,6 @@ function App() {
                 onClose={closePopup}
                 updateUser={updateUser}
                 isLoading={isLoading}
-
                 successfulMessage={successfulMessage}
                 setSuccessfulMessage={setSuccessfulMessage}
               />
