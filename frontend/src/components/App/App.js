@@ -345,6 +345,7 @@ function App() {
         {<Register 
           navigateToMain={navigateToMain}
           navigateToLogin={navigateToLogin}
+          handleLogin={handleLogin}
         />}
       />
       <Route path='/signin' element={

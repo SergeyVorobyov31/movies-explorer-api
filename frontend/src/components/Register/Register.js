@@ -47,7 +47,16 @@ function Register(props) {
         if(isValid) {
             auth.register(formValue.name, formValue.email, formValue.password)
             .then((res) => {
-                navigate("/signin", {replace: true});
+                auth.authorize(formValue.email, formValue.password)
+                .then((res) => {
+                    if (res.token) {
+                        localStorage.setItem('jwt', res.token);
+                        setFormValue({username: '', password: ''});
+                        props.handleLogin();
+                        navigate('/movies', {replace: true});
+                    }
+                })
+                .catch(err => console.log(err)); 
             })
             .catch((err) => {
                 console.log(err);
