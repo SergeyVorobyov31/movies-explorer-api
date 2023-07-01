@@ -21,7 +21,7 @@ function SavedMoviesCardList(props) {
                                     duration={item.duration}
                                     likeCard={props.likeCard}
                                     savedIds={props.savedIds}
-                                    deleteMovie={props.deleteMovie}
+                                    deleteSavedMovie={props.deleteSavedMovie}
                                     />
                                  );
                             }
@@ -37,7 +37,7 @@ function SavedMoviesCardList(props) {
                                     duration={item.duration}
                                     likeCard={props.likeCard}
                                     savedIds={props.savedIds}
-                                    deleteMovie={props.deleteMovie}
+                                    deleteSavedMovie={props.deleteSavedMovie}
                                 />
                              );
                         }
@@ -55,7 +55,7 @@ function SavedMoviesCardList(props) {
                                         duration={item.duration}
                                         likeCard={props.likeCard}
                                         savedIds={props.savedIds}
-                                        deleteMovie={props.deleteMovie}
+                                        deleteSavedMovie={props.deleteSavedMovie}
                                     />
                                 );
                             } else if ((item.nameRU.toLowerCase().includes(`${props.savedSearchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.savedSearchFormText.toLowerCase()}`))) {
@@ -70,7 +70,7 @@ function SavedMoviesCardList(props) {
                                         duration={item.duration}
                                         likeCard={props.likeCard}
                                         savedIds={props.savedIds}
-                                        deleteMovie={props.deleteMovie}
+                                        deleteSavedMovie={props.deleteSavedMovie}
                                     />
                                 );
                             }  

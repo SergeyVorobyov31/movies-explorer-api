@@ -152,6 +152,16 @@ function App() {
   }
 
   function deleteMovie(movie) {
+    const card = savedCards.find((card => movie.id === card.movieId));;
+    api.deleteMovie(card._id)
+    .then(res => {
+      console.log(res);
+      setSavedCards((movies) => movies.filter(item => item._id !== card._id) )
+    })
+    .catch(err => console.log(err));
+  }
+
+  function deleteSavedMovie(movie) {
     api.deleteMovie(movie._id)
     .then(res => {
       setSavedCards((movies) => movies.filter(item => item._id !== movie._id) )
@@ -289,6 +299,9 @@ function App() {
               isOpen={isPopup}
               onClose={closePopup}
               likeCard={saveMovie}
+
+              deleteMovie={deleteMovie}
+
               savedIds={savedIds}
               index={index}
               plusIndex={plusIndex}
@@ -310,7 +323,10 @@ function App() {
               onPopup={popupOpen}
               isOpen={isPopup}
               onClose={closePopup}
-              deleteMovie={deleteMovie}
+              // deleteMovie={deleteMovie}
+
+              deleteSavedMovie={deleteSavedMovie}
+
               savedIds={savedIds}
               savedFilterButton={savedFilterButton}
               setSavedFilterButton={setSavedFilterButton}

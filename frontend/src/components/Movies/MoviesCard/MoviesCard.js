@@ -1,17 +1,22 @@
 import React, {useState} from "react";
 
 function MoviesCard(props) {
-    const [isLiked, setIsLiked] = useState(false);
+
+    const [isLiked, setIsLiked] = useState(props.like);
 
     function handleLike() {
         if (isLiked === false) {
         props.likeCard(props.card);
         setIsLiked(true);
+        } else {
+            props.deleteMovie(props.card);
+            setIsLiked(false);
+            console.log(props.like);
         }
     }
 
     function handleDelete() {
-        props.deleteMovie(props.card);
+        props.deleteSavedMovie(props.card);
     }
 
     const hours = Math.floor(props.duration / 60);
@@ -27,7 +32,7 @@ function MoviesCard(props) {
                     <h2 className="moviesCard__name">{props.name}</h2>
                     <p className="moviesCard__duration">{`${hours}ч ${minutes}м`}</p>
                 </div>
-                <button className={`moviesCard__like ${props.like && 'moviesCard__like_active'}`} type="button" onClick={handleLike}></button>
+                <button className={`moviesCard__like ${isLiked && 'moviesCard__like_active'}`} type="button" onClick={handleLike}></button>
                 <button className="moviesCard__delete" type="button" onClick={handleDelete}></button>
             </div>
         </li>

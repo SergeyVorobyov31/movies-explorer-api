@@ -3,12 +3,14 @@ import MoviesCard from '../MoviesCard/MoviesCard'
 
 function MoviesCardList(props) {
 
-    // console.log(localStorage);
-
     function liked(card) {
         let like = false
         if(props.savedIds.has(card.id)) {
             like = true;
+            return like;
+        } else {
+            props.savedIds.delete(card.id)
+            like = false;
             return like;
         }
     }
@@ -40,6 +42,9 @@ function MoviesCardList(props) {
                                             name={item.nameRU}
                                             duration={item.duration}
                                             likeCard={props.likeCard}
+
+                                            deleteMovie={props.deleteMovie}
+
                                             savedIds={props.savedIds}
                                             like={liked(item)}
                                         />
@@ -57,6 +62,9 @@ function MoviesCardList(props) {
                                             name={props.array[props.index-1].nameRU}
                                             duration={props.array[props.index-1].duration}
                                             likeCard={props.likeCard}
+
+                                            deleteMovie={props.deleteMovie}
+
                                             savedIds={props.savedIds}
                                             like={liked(props.array[props.index-1])}
                                             />
@@ -75,6 +83,9 @@ function MoviesCardList(props) {
                                     name={item.nameRU}
                                     duration={item.duration}
                                     likeCard={props.likeCard}
+
+                                    deleteMovie={props.deleteMovie}
+
                                     savedIds={props.savedIds}
                                     like={liked(item)}
                                 />
@@ -93,6 +104,9 @@ function MoviesCardList(props) {
                                         name={item.nameRU}
                                         duration={item.duration}
                                         likeCard={props.likeCard}
+
+                                        deleteMovie={props.deleteMovie}
+
                                         savedIds={props.savedIds}
                                         like={liked(item)}
                                     />
@@ -108,6 +122,9 @@ function MoviesCardList(props) {
                                         name={item.nameRU}
                                         duration={item.duration}
                                         likeCard={props.likeCard}
+
+                                        deleteMovie={props.deleteMovie}
+
                                         savedIds={props.savedIds}
                                         like={liked(item)}
                                     />
