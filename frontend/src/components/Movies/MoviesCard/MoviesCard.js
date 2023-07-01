@@ -11,7 +11,6 @@ function MoviesCard(props) {
         } else {
             props.deleteMovie(props.card);
             setIsLiked(false);
-            console.log(props.like);
         }
     }
 

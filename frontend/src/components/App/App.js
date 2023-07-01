@@ -10,6 +10,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRouteElement from '../ProtectedRouteElement/ProtectedRouteElement';
+import ProtectedRouteElementForAuthorized from '../ProtectedRouteElementForAuthorized/ProtectedRouteElementForAuthorized';
 import * as auth from '../../utils/auth';
 import MainApi from '../../utils/MainApi';
 import MoviesApi from '../../utils/MoviesApi';
@@ -45,7 +46,6 @@ function App() {
       'Content-Type': 'application/json'
     }
   })
-
 
   const savedIds = useMemo(() => {
     const ids = savedCards.map(({movieId}) => movieId);
@@ -155,7 +155,6 @@ function App() {
     const card = savedCards.find((card => movie.id === card.movieId));;
     api.deleteMovie(card._id)
     .then(res => {
-      console.log(res);
       setSavedCards((movies) => movies.filter(item => item._id !== card._id) )
     })
     .catch(err => console.log(err));
@@ -288,7 +287,7 @@ function App() {
           <Footer/>
         </>}
       />
-      <Route element={<ProtectedRouteElement loggedIn={loggedIn}/>}>
+      <Route element={<ProtectedRouteElement/>}>
           <Route path='/movies' element={
             <Movies
               array={cards}
@@ -350,7 +349,7 @@ function App() {
           }/>
       </Route>
       
-
+    <Route element={<ProtectedRouteElementForAuthorized/>}>
       <Route path='/signup' element=
         {<Register 
           navigateToMain={navigateToMain}
@@ -365,6 +364,7 @@ function App() {
           handleLogin={handleLogin}
         />}
       />
+    </Route>
       <Route path='*' element={<PageNotFound/>}/>
     </Routes>
   );
