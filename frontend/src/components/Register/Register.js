@@ -60,7 +60,7 @@ function Register(props) {
             })
             .catch((err) => {
                 console.log(err);
-                setErrors({...errors, 'password': "Что-то пошло не так..." });
+                setErrors({...errors, 'password': err });
             })
         }
     }

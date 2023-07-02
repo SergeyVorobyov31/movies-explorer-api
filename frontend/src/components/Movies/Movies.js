@@ -33,7 +33,8 @@ function Movies(props) {
                 }
             />
             <main className="movies">
-                <SearchForm filterButton={props.filterButton} setFilterButton={props.setFilterButton} searchFormText={props.searchFormText} setIsSearchFormText={props.setIsSearchFormText} setButtonMore={props.setButtonMore}/>
+                <SearchForm setIsNotFoundText={props.setIsNotFoundText} array={props.array} filterButton={props.filterButton} setFilterButton={props.setFilterButton} searchFormText={props.searchFormText} setIsSearchFormText={props.setIsSearchFormText} setButtonMore={props.setButtonMore}/>
+                <p className="searchForm__text">{props.notFoundText === "" ? "" : "Ничего не найдено"}</p>
                 <MoviesCardList array={props.array} deleteMovie={props.deleteMovie} savedIds={props.savedIds} likeCard={props.likeCard} plusIndex={props.plusIndex} index={props.index} filterButton={props.filterButton} searchFormText={props.searchFormText} setButtonMore={props.setButtonMore} buttonMore={props.buttonMore}/>
             </main>
             <Preloader isLoading={props.isLoading}/>

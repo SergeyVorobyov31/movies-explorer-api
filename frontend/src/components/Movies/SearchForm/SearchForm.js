@@ -10,7 +10,7 @@ function SearchForm(props) {
         filter.addEventListener("click", () => {
             filterText.classList.toggle("searchForm__filter-text_active");
             if (filterText.classList.contains("searchForm__filter-text_active")) {
-                props.setFilterButton(true);
+                props.setFilterButton('true');
                 localStorage.setItem('filterButton', props.filterButton);
                 if (localStorage.searchFormText === "") {
                     props.setButtonMore(false);
@@ -19,7 +19,7 @@ function SearchForm(props) {
                 if (localStorage.searchFormText === "") {
                     props.setButtonMore(true);
                 }
-                props.setFilterButton(false);
+                props.setFilterButton('false');
                 localStorage.setItem('filterButton', props.filterButton);
             }
         })
@@ -31,6 +31,7 @@ function SearchForm(props) {
         props.setIsSearchFormText(search.value);
         localStorage.setItem('searchFormText', search.value);
         if (search.value === "") {
+            props.setIsNotFoundText("");
             if (localStorage.filterButton.startsWith("true")) {
                 props.setButtonMore(false);
             } else {
@@ -38,6 +39,23 @@ function SearchForm(props) {
             }
         } else {
             props.setButtonMore(false);
+            const nameRu = props.array.find(card => card.nameRU.toLowerCase().includes(search.value.toLowerCase()));
+            const nameEn = props.array.find(card => card.nameEN.toLowerCase().includes(search.value.toLowerCase()));
+            if (nameRu || nameEn){
+                props.setIsNotFoundText("");
+            } else {
+                props.setIsNotFoundText("Ничего не найдено");
+            }
+        }
+
+        if (localStorage.filterButton.startsWith("true") && search.value !== "") {
+            const nameRu = props.array.find(card => card.nameRU.toLowerCase().includes(search.value.toLowerCase()) && card.duration < 41);
+            const nameEn = props.array.find(card => card.nameEN.toLowerCase().includes(search.value.toLowerCase()) && card.duration < 41);
+            if (nameRu || nameEn){
+                props.setIsNotFoundText("");
+            } else {
+                props.setIsNotFoundText("Ничего не найдено");
+            }
         }
     }
 

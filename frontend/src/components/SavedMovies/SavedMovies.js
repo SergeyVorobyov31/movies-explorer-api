@@ -31,7 +31,8 @@ function SavedMovies(props) {
                 }
             />
             <main className="savedMovies">
-                <SavedSearchForm savedFilterButton={props.savedFilterButton} setSavedFilterButton={props.setSavedFilterButton} savedSearchFormText={props.savedSearchFormText} setIsSavedSearchFormText={props.setIsSavedSearchFormText} setButtonMore={props.setButtonMore}/>
+                <SavedSearchForm setIsNotFoundTextSaved={props.setIsNotFoundTextSaved} array={props.array} savedFilterButton={props.savedFilterButton} setSavedFilterButton={props.setSavedFilterButton} savedSearchFormText={props.savedSearchFormText} setIsSavedSearchFormText={props.setIsSavedSearchFormText}/>
+                <p className="searchForm__text">{props.notFoundTextSaved === "" ? "" : "Ничего не найдено"}</p>
                 <SavedMoviesCardList array={props.array} savedIds={props.savedIds} deleteSavedMovie={props.deleteSavedMovie} savedFilterButton={props.savedFilterButton} setSavedFilterButton={props.setSavedFilterButton} savedSearchFormText={props.savedSearchFormText}/>
             </main>
             <Footer/>

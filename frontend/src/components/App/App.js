@@ -25,12 +25,14 @@ function App() {
   const [savedCards, setSavedCards] = useState([]);
   const [index, setIndex] = useState();
   const [filterButton, setFilterButton] = useState(localStorage.filterButton);
-  const [savedFilterButton, setSavedFilterButton] = useState(false);
+  const [savedFilterButton, setSavedFilterButton] = useState('false');
   const [searchFormText, setIsSearchFormText] = useState(localStorage.searchFormText);
   const [savedSearchFormText, setIsSavedSearchFormText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [buttonMore, setButtonMore] = useState(true);
   const [successfulMessage, setSuccessfulMessage] = useState('');
+  const [notFoundText, setIsNotFoundText] = useState('');
+  const [notFoundTextSaved, setIsNotFoundTextSaved] = useState('');
   
   const api = new MainApi({
     baseUrl: 'https://api.movies-explorer.net.nomoredomains.rocks',
@@ -55,6 +57,17 @@ function App() {
   useEffect(() => {
     setInitialCountCards();
   }, []);
+
+  //Отображение результата поиска на странице "Фильмы"
+  useEffect(() => {
+    getSearchResultText()
+  }, [cards, filterButton]);
+
+
+  //Отображение результата поиска для выключенной кнопки короткометражек на странице "Сохраненные фильмы"
+  useEffect(() => {
+    getSearchResultSavedText();
+  }, [savedCards, savedFilterButton])
 
   useEffect(() => {
     const token = localStorage.getItem('jwt');
@@ -139,6 +152,69 @@ function App() {
     }
   }
 
+  function getSearchResultText() {
+    if (cards.length > 0) {
+      const nameRu = cards.find(card => card.nameRU.toLowerCase().includes(searchFormText.toLowerCase()));
+      const nameEn = cards.find(card => card.nameEN.toLowerCase().includes(searchFormText.toLowerCase()));
+      if (filterButton.startsWith("false")) {
+        if (searchFormText === "") {
+          setIsNotFoundText("");
+        } else {
+          if (nameRu || nameEn){
+              setIsNotFoundText("");
+          } else {
+            setIsNotFoundText("Ничего не найдено");
+          }
+        }
+      } else if (filterButton.startsWith("true") && searchFormText !== "") {
+        if (cards.length > 0) {
+          const shortNameRu = cards.find(card => card.nameRU.toLowerCase().includes(searchFormText.toLowerCase()) && card.duration < 41);
+          const shortNameEn = cards.find(card => card.nameEN.toLowerCase().includes(searchFormText.toLowerCase()) && card.duration < 41);
+          if (shortNameRu || shortNameEn){
+              setIsNotFoundText("");
+          } else {
+            setIsNotFoundText("Ничего не найдено");
+          }
+        } 
+      }
+    }
+  } 
+
+  function getSearchResultSavedText() {
+    if (savedCards.length === 0) {
+      setIsNotFoundTextSaved("Ничего не найдено");
+    } else if (savedSearchFormText === "" && savedFilterButton.startsWith("true")) {
+        setIsNotFoundTextSaved("");
+        const shortNameRu = savedCards.find(card => card.nameRU.toLowerCase().includes(savedSearchFormText.toLowerCase()) && card.duration < 41);
+        const shortNameEn = savedCards.find(card => card.nameEN.toLowerCase().includes(savedSearchFormText.toLowerCase()) && card.duration < 41);
+        if (shortNameRu || shortNameEn) {
+          setIsNotFoundTextSaved("");
+        } else {
+          setIsNotFoundTextSaved("1");
+        }
+    } else {
+      if (savedSearchFormText !== "" && savedFilterButton.startsWith("true")) {
+        const shortNameRu = savedCards.find(card => card.nameRU.toLowerCase().includes(savedSearchFormText.toLowerCase()) && card.duration < 41);
+        const shortNameEn = savedCards.find(card => card.nameEN.toLowerCase().includes(savedSearchFormText.toLowerCase()) && card.duration < 41);
+        if (shortNameRu || shortNameEn) {
+          setIsNotFoundTextSaved("");
+        } else {
+          setIsNotFoundTextSaved("Ничего не найдено");
+        }
+      } else if (savedSearchFormText !== "" && savedFilterButton.startsWith("false")) {
+        const nameRu = savedCards.find(card => card.nameRU.toLowerCase().includes(savedSearchFormText.toLowerCase()));
+        const nameEn = savedCards.find(card => card.nameEN.toLowerCase().includes(savedSearchFormText.toLowerCase()));
+        if (nameRu || nameEn) {
+          setIsNotFoundTextSaved("");
+        } else {
+          setIsNotFoundTextSaved("Ничего не найдено");
+        }
+      } else {
+        setIsNotFoundTextSaved("");
+      }
+    }
+  }
+
   function saveMovie(movie) {
     if (savedIds.has(movie.id)) {
       return;
@@ -153,11 +229,15 @@ function App() {
 
   function deleteMovie(movie) {
     const card = savedCards.find((card => movie.id === card.movieId));;
-    api.deleteMovie(card._id)
-    .then(res => {
-      setSavedCards((movies) => movies.filter(item => item._id !== card._id) )
-    })
-    .catch(err => console.log(err));
+    if (card) {
+      api.deleteMovie(card._id)
+      .then(res => {
+        setSavedCards((movies) => movies.filter(item => item._id !== card._id) )
+      })
+      .catch(err => console.log(err));
+    } else {
+        return;
+    }
   }
 
   function deleteSavedMovie(movie) {
@@ -176,7 +256,7 @@ function App() {
     localStorage.removeItem('savedFilterButton');
     localStorage.removeItem('searchFormText');
     localStorage.removeItem('savedSearchFormText');
-    setSavedFilterButton(false)
+    setSavedFilterButton('false')
     setIsSavedSearchFormText("");
     setLoggedIn(false);
     navigate("/", {replace:true});
@@ -184,8 +264,8 @@ function App() {
 
   const handleLogin = () => {
     setLoggedIn(true);
-    setSavedFilterButton(false)
-    setFilterButton(false);
+    setSavedFilterButton('false')
+    setFilterButton('false');
     setIsSearchFormText("");
     localStorage.setItem('savedFilterButton', savedFilterButton);
     localStorage.setItem('savedSearchFormText', savedSearchFormText);
@@ -236,6 +316,8 @@ function App() {
   }
 
   function navigateToSavedMovies() {
+    setSavedFilterButton("false");
+    setIsSavedSearchFormText("")
     navigate('/saved-movies', {replace: true});
     closePopup()
   }
@@ -309,6 +391,8 @@ function App() {
               isLoading={isLoading}
               buttonMore={buttonMore}
               setButtonMore={setButtonMore}
+              notFoundText={notFoundText}
+              setIsNotFoundText={setIsNotFoundText}
             />
           }/>
           <Route path='/saved-movies' element={
@@ -326,7 +410,8 @@ function App() {
               setSavedFilterButton={setSavedFilterButton}
               setIsSavedSearchFormText={setIsSavedSearchFormText}
               savedSearchFormText={savedSearchFormText}
-              setButtonMore={setButtonMore}
+              notFoundTextSaved={notFoundTextSaved}
+              setIsNotFoundTextSaved={setIsNotFoundTextSaved}
             />
           }/>
           <Route path='/profile' element={
