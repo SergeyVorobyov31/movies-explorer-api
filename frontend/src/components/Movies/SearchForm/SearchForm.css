@@ -21,11 +21,31 @@
     font-size: 18px;
     line-height: 20px;
     padding: 25px;
-    border: 1px solid rgba(170, 170, 170, 0.2);
+    border: 1px solid #aaaaaa33;
     border-radius: 8px;
     outline: none;
     overflow: hidden;
 }
+
+.searchForm__input:-webkit-autofill {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 40rem #202020 inset;
+    caret-color: #fff;
+    -webkit-border-start-color: rgb(60, 60, 60);
+    -webkit-border-before-color: rgb(60, 60, 60);
+    -webkit-border-after-color: rgb(60, 60, 60);
+    -webkit-border-end-color: rgb(60, 60, 60);
+  }
+
+.searchForm__input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 40rem #202020 inset;
+    caret-color: #fff;
+    -webkit-border-start-color: rgb(101, 101, 101);
+    -webkit-border-before-color: rgb(101, 101, 101);
+    -webkit-border-after-color: rgb(101, 101, 101);
+    -webkit-border-end-color: rgb(101, 101, 101);
+  }
 
 .searchForm__input:focus {
     border-color: rgba(170, 170, 170, 0.5); 
@@ -87,7 +107,7 @@
     cursor: pointer;
 }
 
-.searchForm__filter-invisible-checkbox:checked + .searchForm__filter-visible-checkbox {
+.searchForm__filter-visible-checkbox_active {
     background-color: #3DDC84;
     left: 18px;
 }

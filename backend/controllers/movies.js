@@ -9,7 +9,7 @@ module.exports.getMovie = (req, res, next) => {
   Movie.find({})
     .then((movies) => {
       const arr = movies.filter((movie) => movie.owner.toString() === owner);
-      res.send(arr);
+      res.send(arr.reverse());
     })
     .catch(() => {
       next(new ServerError('Ошибка на сервере'));

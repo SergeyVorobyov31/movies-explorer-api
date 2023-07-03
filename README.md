@@ -2,10 +2,12 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.108.60
+IP-адрес 158.160.107.212
 
 Frontend https://movies-explorer.net.nomoredomains.rocks/
 
 Backend https://api.movies-explorer.net.nomoredomains.rocks
 
 Макет Figma https://disk.yandex.ru/d/kgsxsR5Mc2z3Ng
+
+Pull request для ревью функциональности https://github.com/SergeyVorobyov31/movies-explorer-api/pull/3

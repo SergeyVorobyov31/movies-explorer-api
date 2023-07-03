@@ -12,7 +12,15 @@ function Main(props) {
       <>
         <Header 
           name={'main'}
-          children={<NavTab/>}
+          children={<NavTab 
+            changeHeader={props.changeHeader}
+              loggedIn={props.loggedIn}
+              navigateToRegister={props.navigateToRegister}
+              navigateToLogin={props.navigateToLogin}
+              navigateToSavedMovies={props.navigateToSavedMovies}
+              navigateToMovies={props.navigateToMovies}
+              navigateToProfile={props.navigateToProfile}
+            />}
         />
         <main className="main"> 
           <Promo/>

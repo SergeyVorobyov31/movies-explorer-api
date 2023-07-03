@@ -1,40 +1,131 @@
 import React from "react";
 import MoviesCard from '../MoviesCard/MoviesCard'
-import card1 from "../../../images/pic__COLOR_pic.png";
-import card2 from "../../../images/pic__COLOR_pic1.png";
-import card3 from "../../../images/pic__COLOR_pic2.png";
-import card4 from "../../../images/pic__COLOR_pic3.png";
-import card5 from "../../../images/pic__COLOR_pic4.png";
-import card6 from "../../../images/pic__COLOR_pic5.png";
-import card7 from "../../../images/pic__COLOR_pic6.png";
-import card8 from "../../../images/pic__COLOR_pic7.png";
-import card9 from "../../../images/pic__COLOR_pic8.png";
-import card10 from "../../../images/pic__COLOR_pic9.png";
-import card11 from "../../../images/pic__COLOR_pic10.png";
-import card12 from "../../../images/pic__COLOR_pic11.png";
 
 function MoviesCardList(props) {
+
+    function liked(card) {
+        let like = false
+        if(props.savedIds.has(card.id)) {
+            like = true;
+            return like;
+        } else {
+            props.savedIds.delete(card.id)
+            like = false;
+            return like;
+        }
+    }
+
+    function moreFilms() {
+        props.setButtonMore(true);
+        props.plusIndex(props.index);
+        if (props.array.length <= props.index) {
+            props.setButtonMore(false);
+        }
+    }
+
     return(
         <section className="moviesCardList">
             <ul className="elements__list">
-            {/* {props.array.map((item) => {
-                return( */}
-                    <MoviesCard nameClass="movies" image={card1}/>
-                    <MoviesCard nameClass="movies" image={card2}/>
-                    <MoviesCard nameClass="movies" image={card3}/>
-                    <MoviesCard nameClass="movies" image={card4}/>
-                    <MoviesCard nameClass="movies" image={card5}/>
-                    <MoviesCard nameClass="movies" image={card6}/>
-                    <MoviesCard nameClass="movies" image={card7}/>
-                    <MoviesCard nameClass="movies" image={card8}/>
-                    <MoviesCard nameClass="movies" image={card9}/>
-                    <MoviesCard nameClass="movies" image={card10}/>
-                    <MoviesCard nameClass="movies" image={card11}/>
-                    <MoviesCard nameClass="movies" image={card12}/>
-                {/* );    
-            })} */}
+            {
+                props.array.map((item) => {
+                    if (localStorage.filterButton.startsWith("false")) {
+                        if (props.searchFormText === "") {
+                            while((item.id < props.index) && (item.id < 102)) {
+                                while(item.id < props.index) {
+                                    return(
+                                        <MoviesCard
+                                            nameClass="movies"
+                                            key={item.id}
+                                            card={item}
+                                            url={item.trailerLink}
+                                            image={item.image.url}
+                                            name={item.nameRU}
+                                            duration={item.duration}
+                                            likeCard={props.likeCard}
+                                            deleteMovie={props.deleteMovie}
+                                            savedIds={props.savedIds}
+                                            like={liked(item)}
+                                        />
+                                     );
+                                }
+                                if(props.buttonMore) {
+                                    for (let index = props.index; index < props.index + 3; props.index++) {
+                                        return(
+                                            <MoviesCard
+                                            nameClass="movies"
+                                            key={index}
+                                            card={props.array[props.index-1]}
+                                            url={props.array[props.index-1].trailerLink}
+                                            image={props.array[props.index-1].image.url}
+                                            name={props.array[props.index-1].nameRU}
+                                            duration={props.array[props.index-1].duration}
+                                            likeCard={props.likeCard}
+                                            deleteMovie={props.deleteMovie}
+                                            savedIds={props.savedIds}
+                                            like={liked(props.array[props.index-1])}
+                                            />
+                                        );
+                                    }
+                                }
+                            }
+                        } else if ((item.nameRU.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`))) {
+                            return(
+                                <MoviesCard
+                                    nameClass="movies"
+                                    key={item.id}
+                                    card={item}
+                                    url={item.trailerLink}
+                                    image={item.image.url}
+                                    name={item.nameRU}
+                                    duration={item.duration}
+                                    likeCard={props.likeCard}
+                                    deleteMovie={props.deleteMovie}
+                                    savedIds={props.savedIds}
+                                    like={liked(item)}
+                                />
+                            )
+                        }
+                    } else {
+                        if (item.duration < 41) {
+                            if (props.searchFormText === "") {
+                                return(
+                                    <MoviesCard
+                                        nameClass="movies"
+                                        key={item.id}
+                                        card={item}
+                                        url={item.trailerLink}
+                                        image={item.image.url}
+                                        name={item.nameRU}
+                                        duration={item.duration}
+                                        likeCard={props.likeCard}
+                                        deleteMovie={props.deleteMovie}
+                                        savedIds={props.savedIds}
+                                        like={liked(item)}
+                                    />
+                                );
+                            } else if ((item.nameRU.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`)) || (item.nameEN.toLowerCase().includes(`${props.searchFormText.toLowerCase()}`))) {
+                                return(
+                                    <MoviesCard
+                                        nameClass="movies"
+                                        key={item.id}
+                                        card={item}
+                                        url={item.trailerLink}
+                                        image={item.image.url}
+                                        name={item.nameRU}
+                                        duration={item.duration}
+                                        likeCard={props.likeCard}
+                                        deleteMovie={props.deleteMovie}
+                                        savedIds={props.savedIds}
+                                        like={liked(item)}
+                                    />
+                                );
+                            }
+                        }
+                    }
+                })
+            } 
             </ul>
-            <button className="moviesCardList__button" type="button">Еще</button>
+            <button className={`moviesCardList__button ${props.buttonMore ? "moviesCardList__button_active" : "moviesCardList__button_disable"}`} type="button" onClick={moreFilms}>Еще</button>
         </section>
     );
 }

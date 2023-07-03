@@ -13,6 +13,7 @@
 }
 
 .sign__container {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 0 0 10px;
@@ -45,6 +46,12 @@
     overflow: hidden;
 }
 
+.sign__input:-webkit-autofill {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 40rem #3f3f3f inset;
+  caret-color: #fff;
+}
+
 .sign__input:focus {
     background-color: #3f3f3f;
 }
@@ -58,10 +65,18 @@
     line-height: 12px;
     padding: 0;
     margin: 0;
+    overflow: hidden;
+}
+
+.sign__error_disable {
+    display: none;
+}
+
+.sign__error_active {
+    display: inline-block;
 }
 
 .sign__button {
-    background-color: #4285F4;
     color: #fff;
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-weight: 500;
@@ -77,6 +92,14 @@
 
 .sign__button:hover {
     opacity: 0.7;
+}
+
+.sign__button_active {
+    background-color: #4285F4;
+}
+
+.sign__button_disable {
+    background-color: #2f2f2f;
 }
 
 .sign__span {
@@ -105,6 +128,10 @@
     flex-direction: column;
 }
 
+.sign__footer_register {
+    margin: 69px 0 0 ;
+} 
+
 @media screen and (min-width: 250px) and (max-width: 767px) {
     .sign__component {
         max-width: 260px;
@@ -113,7 +140,7 @@
     .sign__footer {
         position: fixed;
         align-items: center;
-        min-width: 100%;
+        /* min-width: 100%; */
         bottom: 30px;
         max-width: 260px;
     }
